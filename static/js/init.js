@@ -40,5 +40,5 @@ function initMap() {
 
   mymap.locate({setView: true, maxZoom: 16});
 
-  setMarkersFromLocations();
+  setMarkersFromLocations(mymap);
 }

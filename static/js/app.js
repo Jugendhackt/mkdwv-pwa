@@ -81,6 +81,7 @@ function setMarkersFromLocations(map) {
 }
 
 function getTrashcans(lat, long) {
+  
 }
 
 
