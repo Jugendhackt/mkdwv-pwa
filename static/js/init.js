@@ -42,3 +42,5 @@ function initMap() {
 
   setMarkersFromLocations(mymap);
 }
+
+getTrashcans();

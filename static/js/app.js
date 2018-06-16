@@ -16,7 +16,7 @@ const ENDPOINTS = {
   },
   'trashcans_fetch': {
     'method': 'GET',
-    'uri': `${BASE_URL}/trash`
+    'uri': `${BASE_URL}/trashcans`
   }
 };
 
@@ -92,7 +92,11 @@ function setMarkersFromLocations(map) {
 }
 
 function getTrashcans(lat, long) {
-
+  window.fetch(TRASHCANS_ENDPOINT.uri).then(function(response) {
+    response.json();
+  }).then(function(json) {
+    console.log(json);
+  });
 }
 
 
