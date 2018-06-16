@@ -17,11 +17,7 @@ function updateLocation(e, map) {
 }
 
 function initMap() {
-  var data = getPointData(1)
-  if(data == false) {
-    alert("Data could not load!");
-  }
-  mymap = L.map('mapid').setView([data.lat, data.lng], 13);
+  mymap = L.map('mapid').setView([50.104278, 8.675969], 13);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -40,7 +36,6 @@ function initMap() {
 
   mymap.locate({setView: true, maxZoom: 16});
 
-  setMarkersFromLocations(mymap);
-}
 
-populateByTrashcans(50.104278, 8.675969, mymap);
+  populateByTrashcans(50.104278, 8.675969, mymap);
+}

@@ -33,7 +33,7 @@ const TRASH_ENDPOINT     = ENDPOINTS.trash_fetch; // Trash endpoint
 
 
 
-
+/*
 let LOCATIONS = {
   1: {
     'title': 'Museum für Kommunikation',
@@ -46,9 +46,11 @@ let LOCATIONS = {
     'lng': 8.678191
   }
 };
+*/
 
+let LOCATIONS = [];
 
-console.log(LOCATIONS);
+//console.log(LOCATIONS);
 
 
 
@@ -63,8 +65,8 @@ function getPointData(id) {
 }
 
 
-console.log(getPointData(1));
-console.log(getPointData(0));
+//console.log(getPointData(1));
+//console.log(getPointData(0));
 
 function getTrashMapIcon() {
   var trashIcon = L.icon({
@@ -78,15 +80,18 @@ function getTrashMapIcon() {
 }
 
 function setMarker(id, map) {
+  console.log(id)
   if(MAP_PROVIDER == "leaflet") {
     const data = getPointData(id);
-    var marker = L.marker([data.lat,data.lng], {icon: getTrashMapIcon()}).addTo(map);
+    var marker = L.marker([data.lat,data.lng]).addTo(map);
 		marker.bindPopup("<b>" + data.title + "</b>").openPopup();
   }
 }
 
-function setMarkersFromLocations(map) {
-  Object.keys(LOCATIONS).forEach(function(key) {
+function setMarkersFromLocations(locations, map) {
+  Object.keys(locations).forEach(function(key) {
+    console.log(key);
+    //debugger;
     setMarker(key, map);
   });
 }
@@ -97,16 +102,19 @@ function populateByTrashcans(lat, lng, map) {
     const respText = this.responseText
     const json = JSON.parse(respText);
     console.log(json);
-    for(var item in json) {
+    for(var item of json) {
+      console.log(item)
       var loc = {
         'title': item.trashBinID,
         'lat': item.latitude,
         'lng': item.longitude
       }
+      console.log(loc)
       //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
-      LOCATIONS[LOCATIONS.length + 1] = loc
+      LOCATIONS.push(loc);
     }
-    setMarkersFromLocations(map);
+    console.log(LOCATIONS);
+    setMarkersFromLocations(LOCATIONS, map);
   }
 
   var oReq = new XMLHttpRequest();
