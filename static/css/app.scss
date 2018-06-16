@@ -105,11 +105,10 @@ main {
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
 }
 
-
-#mapid {
-  width: 100%;
-  min-height: 40%;
-  // its very important!
+p {
+  margin: 15px 10px;
 }
