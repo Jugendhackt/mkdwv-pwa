@@ -35,13 +35,15 @@ const TRASH_ENDPOINT     = ENDPOINTS.trash_fetch; // Trash endpoint
 
 
 const LOCATIONS = {
-  1: {
+  '1': {
     'title': 'Museum für Kommunikation',
     'lat': 50.104278,
     'lng': 8.675969
   }
 };
 
+
+console.log(LOCATIONS);
 
 
 
@@ -52,8 +54,12 @@ function webtest() {
 
 function getPointData(id) {
   let success = false;
-  return LOCATIONS.1;
+  return LOCATIONS[id.toString()];
 }
+
+
+console.log(getPointData(1));
+console.log(getPointData(0));
 
 function setMarker(id, map) {
   if(MAP_PROVIDER == "leaflet") {
