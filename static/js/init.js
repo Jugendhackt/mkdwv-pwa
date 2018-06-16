@@ -5,6 +5,8 @@ if(!webtestResult) {
   console.error("Webtest failed! Response: " + webtestResult);
 } else console.log("Webtest success!");
 
+var mymap;
+
 function updateLocation(e, map) {
   var radius = e.accuracy / 2;
 
@@ -19,8 +21,7 @@ function initMap() {
   if(data == false) {
     alert("Data could not load!");
   }
-  var mymap = L.map('mapid').setView([data.lat, data.lng], 13);
-
+  mymap = L.map('mapid').setView([data.lat, data.lng], 13);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -39,5 +40,5 @@ function initMap() {
 
   mymap.locate({setView: true, maxZoom: 16});
 
-  setMarkersFromLocations(mymap);
+  setMarkersFromLocations();
 }
