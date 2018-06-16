@@ -1,7 +1,7 @@
 
 // Settings
-const DEBUG        = true
-const MAP_PROVIDER = "leaflet"
+const DEBUG        = true;
+const MAP_PROVIDER = "leaflet";
 
 
 const BASE_URL = "http://localhost"
@@ -27,9 +27,9 @@ let TRASHCANS_ENDPOINT = {}
 let TRASH_ENDPOINT = {}
 */
 
-const UPLOAD_ENDPOINT    = ENDPOINTS.trash_upload // Upload endpoint
-const TRASHCANS_ENDPOINT = ENDPOINTS.trashcans_fetch // Trashcans endpoint
-const TRASH_ENDPOINT     = ENDPOINTS.trash_fetch // Trash endpoint
+const UPLOAD_ENDPOINT    = ENDPOINTS.trash_upload; // Upload endpoint
+const TRASHCANS_ENDPOINT = ENDPOINTS.trashcans_fetch; // Trashcans endpoint
+const TRASH_ENDPOINT     = ENDPOINTS.trash_fetch; // Trash endpoint
 
 const LOCATIONS = [
   {
@@ -38,7 +38,7 @@ const LOCATIONS = [
     'lat': 50.104278,
     'lng': 8.675969
   }
-]
+];
 
 
 
@@ -49,12 +49,8 @@ function webtest() {
 
 
 function getPointData(id) {
-  for(var item in LOCATIONS) {
-    if(item.id == id) {
-      return item;
-    }
-  }
-  return false;
+  let success = false;
+  return LOCATIONS[id - 1];
 }
 
 function setMarker(id, map) {
@@ -74,7 +70,7 @@ function setMarkersFromLocations(map) {
 
 
 
-debugSequence()
+debugSequence();
 
 
 
@@ -86,11 +82,11 @@ debugSequence()
 function debugSequence() {
   if(DEBUG) {
     // Log endpoints
-    console.log(`Upload endpoint:`)
-    console.log(UPLOAD_ENDPOINT)
-    console.log(`Trashcans endpoint:`)
-    console.log(TRASHCANS_ENDPOINT)
-    console.log(`Trash endpoint:`)
-    console.log(TRASH_ENDPOINT)
+    console.log(`Upload endpoint:`);
+    console.log(UPLOAD_ENDPOINT);
+    console.log(`Trashcans endpoint:`);
+    console.log(TRASHCANS_ENDPOINT);
+    console.log(`Trash endpoint:`);
+    console.log(TRASH_ENDPOINT);
   }
 }
