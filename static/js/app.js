@@ -1,7 +1,7 @@
 
 // Settings
-const DEBUG = true
-const DATABASE_PROVIDER = "leaflet"
+const DEBUG        = true
+const MAP_PROVIDER = "leaflet"
 
 
 const BASE_URL = "http://localhost"
@@ -48,8 +48,12 @@ function getPointData(id) {
   }
 }
 
-function getMarker(id) {
-
+function setMarker(id, map) {
+  if(MAP_PROVIDER == "leaflet") {
+    const data = getPointData(id);
+    var marker = L.marker([data.lat,data.lng]).addTo(map);
+		marker.bindPopup("<b>" + data.title + "</b>").openPopup();
+  }
 }
 
 
