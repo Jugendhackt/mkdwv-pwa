@@ -35,6 +35,7 @@ function initMap() {
     alert(e.message);
   }
 
+  mymap.on('click', (e) => {alert(e)});
   mymap.on('locationfound', (e) => {updateLocation(e, mymap);});
   mymap.on('locationerror', onLocationError);
 
