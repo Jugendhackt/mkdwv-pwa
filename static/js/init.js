@@ -38,5 +38,8 @@ function initMap() {
   mymap.locate({setView: true, maxZoom: 16});
 
 
-  populateByTrashcans(50.104278, 8.675969, mymap);
+navigator.geolocation.getCurrentPosition(position =>  {
+  console.log(position);
+  populateByTrashcans(position.coords.latitude, position.coords.longitude, mymap);
+})
 }
