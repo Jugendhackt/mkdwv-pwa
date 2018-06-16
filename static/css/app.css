@@ -95,8 +95,7 @@ main {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch; }
 
-#mapid {
-  width: 100%;
-  min-height: 40%; }
+p {
+  margin: 15px 10px; }
 
 /*# sourceMappingURL=app.css.map */
