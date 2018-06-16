@@ -36,7 +36,7 @@ function initMap() {
       var lng = e.latlng.lng;
        alert(e.latlng.lat +" " + e.latlng.lng);
        var marker = L.marker([lat, lng]).addTo(mymap);
-       marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+       marker.bindPopup("<b></b><br></br>"+ lat + " " + lng).openPopup();
   }
 
   mymap.on('click', setMarker);
@@ -51,3 +51,4 @@ navigator.geolocation.getCurrentPosition(position =>  {
   populateByTrashcans(position.coords.latitude, position.coords.longitude, mymap);
 })
 }
+
