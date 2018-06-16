@@ -38,6 +38,13 @@ function webtest() {
   return navigator.onLine;
 }
 
+function getPointCoordinates(id) {
+  return {
+    'lat': 50.104278,
+    'lng': 8.675969
+  }
+}
+
 
 
 
