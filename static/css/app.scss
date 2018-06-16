@@ -26,23 +26,19 @@ html {
 
 body {
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
-          flex-wrap: nowrap;
-  -webkit-box-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: stretch;
-          align-items: stretch;
-          align-content: stretch;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
   background: #ececec;
 }
 
 header {
   width: 100%;
   height: 56px;
-  color: #FFF;
-  background: #3F51B5;
+  color: #000;
+  background: #CDC612;
   position: fixed;
   font-size: 20px;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 2px 9px 1px rgba(0, 0, 0, 0.12), 0 4px 2px -2px rgba(0, 0, 0, 0.2);
@@ -72,9 +68,6 @@ header {
     margin-right: 16px;
     text-indent: -30000px;
     overflow: hidden;
-    opacity: 0.54;
-    -webkit-transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
-    transition: opacity 0.333s cubic-bezier(0, 0, 0.21, 1);
     border: none;
     outline: none;
     cursor: pointer; }
