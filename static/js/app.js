@@ -4,7 +4,7 @@ const DEBUG        = true;
 const MAP_PROVIDER = "leaflet";
 
 
-const BASE_URL = "http://151.216.10.86:8080"
+const BASE_URL = "http://151.216.10.34:8080"
 const ENDPOINTS = {
   'trash_upload': {
     'method': 'POST',
@@ -33,22 +33,24 @@ const TRASH_ENDPOINT     = ENDPOINTS.trash_fetch; // Trash endpoint
 
 
 
-
-const LOCATIONS = {
-  '1': {
+/*
+let LOCATIONS = {
+  1: {
     'title': 'Museum für Kommunikation',
     'lat': 50.104278,
     'lng': 8.675969
   },
-  '2': {
+  2: {
     'title': 'Dönerboot',
     'lat': 50.106136,
     'lng': 8.678191
   }
 };
+*/
 
+let LOCATIONS = [];
 
-console.log(LOCATIONS);
+//console.log(LOCATIONS);
 
 
 
@@ -59,12 +61,12 @@ function webtest() {
 
 function getPointData(id) {
   let success = false;
-  return LOCATIONS[id.toString()];
+  return LOCATIONS[id];
 }
 
 
-console.log(getPointData(1));
-console.log(getPointData(0));
+//console.log(getPointData(1));
+//console.log(getPointData(0));
 
 function getTrashMapIcon() {
   var trashIcon = L.icon({
@@ -78,25 +80,47 @@ function getTrashMapIcon() {
 }
 
 function setMarker(id, map) {
+  console.log(id)
   if(MAP_PROVIDER == "leaflet") {
     const data = getPointData(id);
-    var marker = L.marker([data.lat,data.lng], {icon: getTrashMapIcon()}).addTo(map);
+    var marker = L.marker([data.lat,data.lng]).addTo(map);
 		marker.bindPopup("<b>" + data.title + "</b>").openPopup();
   }
 }
 
-function setMarkersFromLocations(map) {
-  Object.keys(LOCATIONS).forEach(function(key) {
+function setMarkersFromLocations(locations, map) {
+  Object.keys(locations).forEach(function(key) {
+    console.log(key);
+    //debugger;
     setMarker(key, map);
   });
 }
 
-function getTrashcans(lat, long) {
-  window.fetch(TRASHCANS_ENDPOINT.uri).then(function(response) {
-    response.json();
-  }).then(function(json) {
+function populateByTrashcans(lat, lng, map) {
+  function reqListener () {
+    console.log(this.responseText);
+    const respText = this.responseText
+    const json = JSON.parse(respText);
     console.log(json);
-  });
+    for(var item of json) {
+      console.log(item)
+      var loc = {
+        'title': item.trashBinID,
+        'lat': item.latitude,
+        'lng': item.longitude
+      }
+      console.log(loc)
+      //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
+      LOCATIONS.push(loc);
+    }
+    console.log(LOCATIONS);
+    setMarkersFromLocations(LOCATIONS, map);
+  }
+
+  var oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", `${TRASHCANS_ENDPOINT.uri}?position=${lat},${lng}`);
+  oReq.send();
 }
 
 
