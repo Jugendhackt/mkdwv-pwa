@@ -1,11 +1,18 @@
-
 console.log("Loading webtest...");
 const webtestResult = webtest();
 
 if(!webtestResult) {
   console.error("Webtest failed! Response: " + webtestResult);
-  //alert("You are not connected to the internet!");
 } else console.log("Webtest success!");
+
+function updateLocation(e, map) {
+  var radius = e.accuracy / 2;
+
+  L.marker(e.latlng).addTo(map)
+    .bindPopup("Standort auf " + Math.round(radius*10)/10 + "m genau").openPopup();
+
+  L.circle(e.latlng, radius).addTo(map);
+}
 
 function initMap() {
   var data = getPointData(1)
@@ -23,24 +30,14 @@ function initMap() {
     id: 'mapbox.streets'
   }).addTo(mymap);
 
-  function onLocationFound(e) {
-    var radius = e.accuracy / 2; //vorher 2
-
-    L.marker(e.latlng).addTo(mymap)
-      .bindPopup("Standort auf " + Math.round(radius*10)/10 + "m genau").openPopup();
-
-    L.circle(e.latlng, radius).addTo(mymap);
-  }
-
   function onLocationError(e) {
     alert(e.message);
   }
 
-  mymap.on('locationfound', onLocationFound);
+  mymap.on('locationfound', (e) => {updateLocation(e, mymap);});
   mymap.on('locationerror', onLocationError);
 
   mymap.locate({setView: true, maxZoom: 16});
 
   setMarkersFromLocations(mymap);
-
 }
