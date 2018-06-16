@@ -31,15 +31,19 @@ const UPLOAD_ENDPOINT    = ENDPOINTS.trash_upload; // Upload endpoint
 const TRASHCANS_ENDPOINT = ENDPOINTS.trashcans_fetch; // Trashcans endpoint
 const TRASH_ENDPOINT     = ENDPOINTS.trash_fetch; // Trash endpoint
 
-const LOCATIONS = [
-  {
-    'id': 1,
+
+
+
+const LOCATIONS = {
+  '1': {
     'title': 'Museum für Kommunikation',
     'lat': 50.104278,
     'lng': 8.675969
   }
-];
+};
 
+
+console.log(LOCATIONS);
 
 
 
@@ -50,8 +54,12 @@ function webtest() {
 
 function getPointData(id) {
   let success = false;
-  return LOCATIONS[id - 1];
+  return LOCATIONS[id.toString()];
 }
+
+
+console.log(getPointData(1));
+console.log(getPointData(0));
 
 function setMarker(id, map) {
   if(MAP_PROVIDER == "leaflet") {
@@ -62,9 +70,11 @@ function setMarker(id, map) {
 }
 
 function setMarkersFromLocations(map) {
-  for(var item in LOCATIONS) {
-    setMarker(item.id, map);
-  }
+  setMarker(1, map);
+}
+
+function getTrashcans(lat, long) {
+  
 }
 
 
