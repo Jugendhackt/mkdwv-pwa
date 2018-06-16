@@ -21,6 +21,7 @@
 	</main>
 	<script>
       var map;
+			var marker;
       function initMap() {
 				var latlng = getPointCoordinates(1);
         map = new google.maps.Map(document.getElementById('map'), {
@@ -28,7 +29,7 @@
           zoom: 8
         });
 
-				var marker = new google.maps.Marker({
+				marker = new google.maps.Marker({
           position: latlng,
           map: map,
 					animation: google.maps.Animation.DROP,
