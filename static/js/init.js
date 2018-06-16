@@ -34,9 +34,8 @@ function initMap() {
   function setMarker(e){
       var lat = e.latlng.lat;
       var lng = e.latlng.lng;
-       alert(e.latlng.lat +" " + e.latlng.lng);
        var marker = L.marker([lat, lng]).addTo(mymap);
-       marker.bindPopup("<b></b><br></br>"+ lat + " " + lng).openPopup();
+       marker.bindPopup(lat + " " + lng).openPopup();
   }
 
   mymap.on('click', setMarker);
