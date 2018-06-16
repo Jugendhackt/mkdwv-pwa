@@ -4,7 +4,7 @@ const DEBUG        = true;
 const MAP_PROVIDER = "leaflet";
 
 
-const BASE_URL = "http://10.119.136.212:8080"
+const BASE_URL = "http://151.216.10.86:8080"
 const ENDPOINTS = {
   'trash_upload': {
     'method': 'POST',
@@ -66,10 +66,21 @@ function getPointData(id) {
 console.log(getPointData(1));
 console.log(getPointData(0));
 
+function getTrashMapIcon() {
+  var trashIcon = L.icon({
+    iconUrl: 'static/icons/trash.png',
+
+    iconSize:     [32, 32], // size of the icon
+    iconAnchor:   [-20, 67], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  });
+  return trashIcon;
+}
+
 function setMarker(id, map) {
   if(MAP_PROVIDER == "leaflet") {
     const data = getPointData(id);
-    var marker = L.marker([data.lat,data.lng]).addTo(map);
+    var marker = L.marker([data.lat,data.lng], {icon: getTrashMapIcon()}).addTo(map);
 		marker.bindPopup("<b>" + data.title + "</b>").openPopup();
   }
 }
@@ -81,7 +92,7 @@ function setMarkersFromLocations(map) {
 }
 
 function getTrashcans(lat, long) {
-  
+
 }
 
 
