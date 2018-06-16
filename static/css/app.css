@@ -70,11 +70,11 @@ header .headerButton {
   outline: none;
   cursor: pointer; }
 
-header #butRefresh {
-  background: url(/images/ic_refresh_white_24px.svg) center center no-repeat; }
+header #butSettings {
+  background: url(/static/icons/settings.svg) center center no-repeat; }
 
-header #butAdd {
-  background: url(/images/ic_add_white_24px.svg) center center no-repeat; }
+header #butHighscore {
+  background: url(/static/icons/bookmark.svg) center center no-repeat; }
 
 .title {
   font-weight: 400;
