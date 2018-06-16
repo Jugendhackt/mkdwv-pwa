@@ -50,7 +50,7 @@ let LOCATIONS = {
 
 let LOCATIONS = [];
 
-//console.log(LOCATIONS);
+////console.log(LOCATIONS);
 
 
 
@@ -65,8 +65,8 @@ function getPointData(id) {
 }
 
 
-//console.log(getPointData(1));
-//console.log(getPointData(0));
+////console.log(getPointData(1));
+////console.log(getPointData(0));
 
 function getTrashMapIcon() {
   var trashIcon = L.icon({
@@ -80,7 +80,7 @@ function getTrashMapIcon() {
 }
 
 function setMarker(id, map) {
-  console.log(id)
+  //console.log(id)
   if(MAP_PROVIDER == "leaflet") {
     const data = getPointData(id);
     var marker = L.marker([data.lat,data.lng]).addTo(map);
@@ -90,7 +90,9 @@ function setMarker(id, map) {
 
 function setMarkersFromLocations(locations, map) {
   Object.keys(locations).forEach(function(key) {
-    console.log(key);
+    if (key % 15 === 0) {
+      console.log(key);
+    }
     //debugger;
     setMarker(key, map);
   });
@@ -98,22 +100,22 @@ function setMarkersFromLocations(locations, map) {
 
 function populateByTrashcans(lat, lng, map) {
   function reqListener () {
-    console.log(this.responseText);
+    //console.log(this.responseText);
     const respText = this.responseText
     const json = JSON.parse(respText);
-    console.log(json);
+    //console.log(json);
     for(var item of json) {
-      console.log(item)
+      //console.log(item)
       var loc = {
         'title': item.trashBinID,
         'lat': item.latitude,
         'lng': item.longitude
       }
-      console.log(loc)
+      //console.log(loc)
       //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
       LOCATIONS.push(loc);
     }
-    console.log(LOCATIONS);
+    //console.log(LOCATIONS);
     setMarkersFromLocations(LOCATIONS, map);
   }
 
@@ -138,11 +140,11 @@ debugSequence();
 function debugSequence() {
   if(DEBUG) {
     // Log endpoints
-    console.log(`Upload endpoint:`);
-    console.log(UPLOAD_ENDPOINT);
-    console.log(`Trashcans endpoint:`);
-    console.log(TRASHCANS_ENDPOINT);
-    console.log(`Trash endpoint:`);
-    console.log(TRASH_ENDPOINT);
+    //console.log(`Upload endpoint:`);
+    //console.log(UPLOAD_ENDPOINT);
+    //console.log(`Trashcans endpoint:`);
+    //console.log(TRASHCANS_ENDPOINT);
+    //console.log(`Trash endpoint:`);
+    //console.log(TRASH_ENDPOINT);
   }
 }
