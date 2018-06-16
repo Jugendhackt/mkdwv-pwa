@@ -4,7 +4,7 @@ const DEBUG        = true;
 const MAP_PROVIDER = "leaflet";
 
 
-const BASE_URL = "http://151.260.10.86:8080"
+const BASE_URL = "http://151.216.10.86:8080"
 const ENDPOINTS = {
   'trash_upload': {
     'method': 'POST',
@@ -84,7 +84,7 @@ function getTrashcans(lat, long) {
   window.fetch(`${BASE_URL}/trashcans`})
     .then(function(response) {
       return response.json()
-    })
+    });
 }
 
 
