@@ -1,4 +1,4 @@
-#Mit KOT die Welt verbessern!
+# Mit KOT die Welt verbessern!
 
 Endprodukt:
  - Müll melden (an Stadtwerke)
