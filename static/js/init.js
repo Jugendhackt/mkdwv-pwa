@@ -27,7 +27,7 @@ function initMap() {
     var radius = e.accuracy / 2; //vorher 2
 
     L.marker(e.latlng).addTo(mymap)
-      .bindPopup("Standort auf " + radius + "m genau.").openPopup();
+      .bindPopup("Standort auf " + Math.round(radius*10)/10 + "m genau").openPopup();
 
     L.circle(e.latlng, radius).addTo(mymap);
   }
