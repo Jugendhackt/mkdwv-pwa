@@ -1,6 +1,7 @@
 
 // Settings
 const DEBUG = true
+const DATABASE_PROVIDER =
 
 
 const BASE_URL = "http://localhost"
@@ -39,11 +40,16 @@ function webtest() {
 }
 
 
-function getPointCoordinates(id) {
+function getPointData(id) {
   return {
     'lat': 50.104278,
-    'lng': 8.675969
+    'lng': 8.675969,
+    'title': 'Museum für Kommunikation'
   }
+}
+
+function getMarker(id) {
+  
 }
 
 
