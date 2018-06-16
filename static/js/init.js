@@ -30,8 +30,12 @@ function initMap() {
   function onLocationError(e) {
     alert(e.message);
   }
+  
+  function getCoordinates(e){
+      alert(e.latlng.lat +" " + e.latlng.lng);
+  }
 
-  mymap.on('click', (e) => {alert(e)});
+  mymap.on('click', getCoordinates);
   mymap.on('locationfound', (e) => {updateLocation(e, mymap);});
   mymap.on('locationerror', onLocationError);
 
