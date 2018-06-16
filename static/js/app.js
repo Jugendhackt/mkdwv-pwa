@@ -39,6 +39,11 @@ const LOCATIONS = {
     'title': 'Museum für Kommunikation',
     'lat': 50.104278,
     'lng': 8.675969
+  },
+  '2' {
+    'title': 'Dönerboot',
+    'lat': 50.106136,
+    'lng': 8.678191
   }
 };
 
@@ -70,11 +75,13 @@ function setMarker(id, map) {
 }
 
 function setMarkersFromLocations(map) {
-  setMarker(1, map);
+  Object.keys(LOCATIONS).forEach(function(key) {
+    setMarker(key, map);
+  });
 }
 
 function getTrashcans(lat, long) {
-  
+
 }
 
 
