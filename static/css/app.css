@@ -93,7 +93,9 @@ main {
   flex: 1;
   overflow-x: hidden;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch; }
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column; }
 
 p {
   margin: 15px 10px; }
