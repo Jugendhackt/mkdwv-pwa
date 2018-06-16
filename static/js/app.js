@@ -1,7 +1,7 @@
 
 // Settings
 const DEBUG = true
-const DATABASE_PROVIDER =
+const DATABASE_PROVIDER = "leaflet"
 
 
 const BASE_URL = "http://localhost"
@@ -49,7 +49,7 @@ function getPointData(id) {
 }
 
 function getMarker(id) {
-  
+
 }
 
 
