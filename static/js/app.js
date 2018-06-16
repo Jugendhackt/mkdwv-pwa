@@ -70,11 +70,13 @@ function setMarker(id, map) {
 }
 
 function setMarkersFromLocations(map) {
-  setMarker(1, map);
+  Object.keys(LOCATIONS).forEach(function(key) {
+    setMarker(key, map);
+  });
 }
 
 function getTrashcans(lat, long) {
-  
+
 }
 
 
