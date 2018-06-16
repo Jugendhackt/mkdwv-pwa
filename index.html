@@ -22,6 +22,9 @@
 	<script>
 	function initMap() {
 		var data = getPointData(1)
+		if(data == false) {
+			alert("Data could not load!");
+		}
 		var mymap = L.map('mapid').setView([data.lat, data.lng], 13);
 
 
