@@ -22,9 +22,16 @@
 	<script>
       var map;
       function initMap() {
+				var latlng = getPointCoordinates(1);
         map = new google.maps.Map(document.getElementById('map'), {
-          center: getPointCoordinates(1),
+          center: latlng,
           zoom: 8
+        });
+
+				var marker = new google.maps.Marker({
+          position: latlng,
+          map: map,
+          title: '<b>Museum für Kommunikation</b>'
         });
       }
     </script>
