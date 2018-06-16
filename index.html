@@ -22,9 +22,8 @@
 	<script>
       var map;
       function initMap() {
-				var latlng = new google.maps.LatLng(getPointCoordinates(65).lat, getPointCoordinates(65).lng);
         map = new google.maps.Map(document.getElementById('map'), {
-          center: latlng,
+          center: getPointCoordinates(1),
           zoom: 8
         });
       }
