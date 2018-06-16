@@ -1,8 +1,8 @@
 
 console.log("Loading webtest...");
-const webtest = webtest();
+const webtestResult = webtest();
 
-if(!webtest) {
+if(!webtestResult) {
   console.error("Webtest failure! Not connected!");
   alert("You are not connected to the internet!");
 } else console.log("Webtest success!");
