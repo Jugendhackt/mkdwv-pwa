@@ -1,0 +1,14 @@
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+main p {
+  margin: 15px 10px;
+}
+
+#mapid { 
+  width: 100%; 
+  min-height: 40%; 
+  height: 100%;
+}
