@@ -31,11 +31,15 @@ function initMap() {
     alert(e.message);
   }
   
-  function getCoordinates(e){
-      alert(e.latlng.lat +" " + e.latlng.lng);
+  function setMarker(e){
+      var lat = e.latlng.lat;
+      var lng = e.latlng.lng;
+       alert(e.latlng.lat +" " + e.latlng.lng);
+       var marker = L.marker([lat, lng]).addTo(mymap);
+       marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
   }
 
-  mymap.on('click', getCoordinates);
+  mymap.on('click', setMarker);
   mymap.on('locationfound', (e) => {updateLocation(e, mymap);});
   mymap.on('locationerror', onLocationError);
 
