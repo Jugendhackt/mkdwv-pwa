@@ -38,6 +38,7 @@ function webtest() {
   return navigator.onLine;
 }
 
+
 function getPointCoordinates(id) {
   return {
     'lat': 50.104278,

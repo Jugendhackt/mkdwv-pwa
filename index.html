@@ -31,9 +31,19 @@
 				var marker = new google.maps.Marker({
           position: latlng,
           map: map,
+					animation: google.maps.Animation.DROP,
           title: '<b>Museum für Kommunikation</b>'
         });
+				marker.addListener('click', toggleBounce);
       }
+
+			function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBT_WbkgP69luV2Rp5-PPy0kTH3c1ddPqU&callback=initMap"
     async defer></script>
