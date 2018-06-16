@@ -52,7 +52,7 @@ function webtest() {
 
 function getPointData(id) {
   let success = false;
-  return LOCATIONS[id];
+  return LOCATIONS.1;
 }
 
 function setMarker(id, map) {
