@@ -63,6 +63,9 @@ header .headerButton {
   outline: none;
   cursor: pointer; }
 
+header #butAdd {
+  background: url(../../static/icons/add.svg) center center no-repeat; }
+
 header #butSettings {
   background: url(../../static/icons/settings.svg) center center no-repeat; }
 
@@ -96,6 +99,11 @@ main {
   -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column; }
+
+#mapid {
+  width: 100%;
+  min-height: 40%;
+  flex: 1 0; }
 
 p {
   margin: 15px 10px; }
