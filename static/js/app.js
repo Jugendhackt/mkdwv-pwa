@@ -31,6 +31,14 @@ const UPLOAD_ENDPOINT    = ENDPOINTS.trash_upload // Upload endpoint
 const TRASHCANS_ENDPOINT = ENDPOINTS.trashcans_fetch // Trashcans endpoint
 const TRASH_ENDPOINT     = ENDPOINTS.trash_fetch // Trash endpoint
 
+const LOCATIONS = [
+  {
+    'id': 1,
+    'title': 'Museum für Kommunikation',
+    'lat': 50.104278,
+    'lng': 8.675969
+  }
+]
 
 
 
@@ -41,11 +49,12 @@ function webtest() {
 
 
 function getPointData(id) {
-  return {
-    'lat': 50.104278,
-    'lng': 8.675969,
-    'title': 'Museum für Kommunikation'
+  for(var item in LOCATIONS) {
+    if(item.id == id) {
+      return item;
+    }
   }
+  return false;
 }
 
 function setMarker(id, map) {
@@ -53,6 +62,12 @@ function setMarker(id, map) {
     const data = getPointData(id);
     var marker = L.marker([data.lat,data.lng]).addTo(map);
 		marker.bindPopup("<b>" + data.title + "</b>").openPopup();
+  }
+}
+
+function setMarkersFromLocations(map) {
+  for(var item in LOCATIONS) {
+    setMarker(item.id, map);
   }
 }
 
