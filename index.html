@@ -19,6 +19,17 @@
 		<div class="map">
 		</div>
 	</main>
+	<script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: getPointCoordinates(65),
+          zoom: 8
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiVnCRcqUI17n9483isxC3I0xGQupD8iw&callback=initMap"
+    async defer></script>
 	<script src="static/js/app.js"></script>
 	<script src="static/js/init.js"></script>
 </body>
