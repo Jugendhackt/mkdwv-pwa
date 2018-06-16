@@ -43,4 +43,4 @@ function initMap() {
   setMarkersFromLocations(mymap);
 }
 
-getTrashcans();
+populateByTrashcans(50.104278, 8.675969, mymap);

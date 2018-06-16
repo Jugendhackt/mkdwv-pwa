@@ -34,13 +34,13 @@ const TRASH_ENDPOINT     = ENDPOINTS.trash_fetch; // Trash endpoint
 
 
 
-const LOCATIONS = {
-  '1': {
+let LOCATIONS = {
+  1: {
     'title': 'Museum für Kommunikation',
     'lat': 50.104278,
     'lng': 8.675969
   },
-  '2': {
+  2: {
     'title': 'Dönerboot',
     'lat': 50.106136,
     'lng': 8.678191
@@ -59,7 +59,7 @@ function webtest() {
 
 function getPointData(id) {
   let success = false;
-  return LOCATIONS[id.toString()];
+  return LOCATIONS[id];
 }
 
 
@@ -91,12 +91,28 @@ function setMarkersFromLocations(map) {
   });
 }
 
-function getTrashcans(lat, long) {
-  window.fetch(TRASHCANS_ENDPOINT.uri).then(function(response) {
-    response.json();
-  }).then(function(json) {
+function populateByTrashcans(lat, lng, map) {
+  function reqListener () {
+    console.log(this.responseText);
+    const respText = this.responseText
+    const json = JSON.parse(respText);
     console.log(json);
-  });
+    for(var item in json) {
+      var loc = {
+        'title': item.trashBinID,
+        'lat': item.latitude,
+        'lng': item.longitude
+      }
+      //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
+      LOCATIONS[LOCATIONS.length + 1] = loc
+    }
+    setMarkersFromLocations(map);
+  }
+
+  var oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", `${TRASHCANS_ENDPOINT.uri}?position=${lat},${lng}`);
+  oReq.send();
 }
 
 
