@@ -167,7 +167,16 @@ function populateByTrashcans(lat, lng, map) {
         html = html + `<b>${TRANSLATION_DE["payment:none"]["_"]}:</b> ${TRANSLATION_DE["payment:none"][item.subdata["payment:none"]]}<br>`
       }
       if(item.subdata["fee"] && item.subdata["fee"] != undefined) {
-        html = html + `<b>${TRANSLATION_DE["fee"["_"]]}:</b> ${TRANSLATION_DE["fee"][item.subdata["fee"]]}<br>`
+        html = html + `<b>${TRANSLATION_DE["fee"]["_"]}:</b> ${TRANSLATION_DE["fee"][item.subdata["fee"]]}<br>`
+      }
+      if(item.subdata["highway"] && item.subdata["highway"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["highway"]["_"]}:</b> ${TRANSLATION_DE["highway"][item.subdata["highway"]]}<br>`
+      }
+      if(item.subdata["indoor"] && item.subdata["indoor"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["indoor"]["_"]}:</b> ${TRANSLATION_DE["indoor"][item.subdata["indoor"]]}<br>`
+      }
+      if(item.subdata["waste"] && item.subdata["waste"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["waste"]["_"]}:</b> ${TRANSLATION_DE["waste"][item.subdata["waste"]]}<br>`
       }
       //console.log(loc)
       //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
