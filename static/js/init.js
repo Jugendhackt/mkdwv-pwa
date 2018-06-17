@@ -11,7 +11,7 @@ function updateLocation(e, map) {
   var radius = e.accuracy / 2;
 
   L.marker(e.latlng).addTo(map)
-    .bindPopup("Standort auf " + Math.round(radius*10)/10 + "m genau").openPopup();
+    .bindPopup("<b>Dein ungefährer Standort</b>").openPopup();
 
   L.circle(e.latlng, radius).addTo(map);
 }
@@ -29,14 +29,14 @@ function initMap() {
   function onLocationError(e) {
     alert(e.message);
   }
-  
- 
+
+
   function editmarker(){
         displayAdd();
         var msg = document.querySelector("#description").value;
 	  markerbindPopup(msg).openPopup;
 	//markerybindPopup(textfeld.getText, lat + " " + lng );
-  } 
+  }
       function setMarker(e){
       var lat = e.latlng.lat;
       var lng = e.latlng.lng;
@@ -46,7 +46,7 @@ function initMap() {
   }
 
 
-  
+
   mymap.on('click', setMarker);
   mymap.on('locationfound', (e) => {updateLocation(e, mymap);});
   mymap.on('locationerror', onLocationError);
@@ -61,7 +61,6 @@ function initMap() {
 
 navigator.geolocation.getCurrentPosition(position =>  {
   console.log(position);
-  populateByTrashcans(position.coords.latitude, position.coords.longitude, mymap);
+  populateByTrashcans(Math.floor(position.coords.latitude * 1000)/1000, Math.floor(position.coords.longitude * 1000)/1000, mymap);
 })
 }
-

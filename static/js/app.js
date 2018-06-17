@@ -60,6 +60,21 @@ const TRANSLATION_DE = {
   },
   'distance': {
     '_': 'Entfernung'
+  },
+  'level': {
+    '_': 'Level'
+  },
+  'tourism': {
+    '_': 'Tourismus',
+    'information': 'Information'
+  },
+  'lastcheck': {
+    '_': 'Letzte Überprüfung'
+  },
+  'tunnel': {
+    '_': 'Tunnel',
+    'yes': 'Ja',
+    'no': 'Nein'
   }
 };
 
@@ -150,7 +165,7 @@ function populateByTrashcans(lat, lng, map) {
     for(var item of json) {
       let subdata = JSON.parse(item.data)
       item.subdata = subdata
-      let html = `<b>${item.trashBinID}</b><br>`
+      let html = `<b>ID:</b> ${item.trashBinID}<br>`
       //console.log(subdata)
       //console.log(item)
       var loc = {
@@ -158,7 +173,8 @@ function populateByTrashcans(lat, lng, map) {
         'lng': item.longitude
       }
       if(item.distance_in_m && item.distance_in_m != undefined) {
-        html = html + `<b>${TRANSLATION_DE.distance["_"]}:</b> ${item.distance_in_m}m<br>`
+        const newDistance = (Math.floor(item.distance_in_m * 1000)/1000).toString().replace('.', ',')
+        html = html + `<b>${TRANSLATION_DE.distance["_"]}:</b> ${newDistance}m<br>`
       }
       if(item.subdata.vending && item.subdata.vending != undefined) {
         html = html + `<b>Typ:</b> ${TRANSLATION_DE.vending[item.subdata.vending]}<br>`
@@ -177,6 +193,18 @@ function populateByTrashcans(lat, lng, map) {
       }
       if(item.subdata["waste"] && item.subdata["waste"] != undefined) {
         html = html + `<b>${TRANSLATION_DE["waste"]["_"]}:</b> ${TRANSLATION_DE["waste"][item.subdata["waste"]]}<br>`
+      }
+      if(item.subdata["lastcheck"] && item.subdata["lastcheck"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["lastcheck"]["_"]}:</b> ${item.subdata["lastcheck"]}<br>`
+      }
+      if(item.subdata["level"] && item.subdata["level"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["level"]["_"]}:</b> ${item.subdata["level"]}<br>`
+      }
+      if(item.subdata["tourism"] && item.subdata["tourism"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["tourism"]["_"]}:</b> ${TRANSLATION_DE.tourism[item.subdata["tourism"]]}<br>`
+      }
+      if(item.subdata["tunnel"] && item.subdata["tunnel"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["tunnel"]["_"]}:</b> ${TRANSLATION_DE.tunnel[item.subdata["tunnel"]]}<br>`
       }
       //console.log(loc)
       //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
