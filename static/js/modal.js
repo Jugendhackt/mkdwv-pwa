@@ -22,7 +22,8 @@ document.getElementById("butHighscore").onclick = function() {
     document.getElementById("content-highscore").style.display = "block";
 }
 
-document.getElementsByClassName("close").onclick = function() {
+// When the user clicks on <span> (x), close the modal
+document.getElementsByClassName("close")[0].onclick = function() {
     modal.style.display = "none";
 }
 
