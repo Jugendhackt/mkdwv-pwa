@@ -41,7 +41,7 @@ function initMap() {
       function setMarker(e){
       var lat = e.latlng.lat;
       var lng = e.latlng.lng;
-       var marker = L.marker([lat, lng]).on('onclick', editmarker).addTo(mymap);
+       var marker = L.marker([lat, lng]).on('click', editmarker).addTo(mymap);
        marker.bindPopup(lat + " " + lng).openPopup();
        marker;
   }
