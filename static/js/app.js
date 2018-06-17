@@ -4,7 +4,7 @@ const DEBUG        = true;
 const MAP_PROVIDER = "leaflet";
 const TILE_URLS = {
   "default": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  "watercolor": "	http://c.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
+  "watercolor": "	http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
 }
 
 
@@ -57,6 +57,9 @@ const TRANSLATION_DE = {
   'waste': {
     '_': 'Müll',
     'trash': 'Müll'
+  },
+  'distance': {
+    '_': 'Entfernung'
   }
 };
 
@@ -154,11 +157,17 @@ function populateByTrashcans(lat, lng, map) {
         'lat': item.latitude,
         'lng': item.longitude
       }
+      if(item.distance_in_m && item.distance_in_m != undefined) {
+        html = html + `<b>${TRANSLATION_DE.distance["_"]}:</b> ${item.distance_in_m}m<br>`
+      }
       if(item.subdata.vending && item.subdata.vending != undefined) {
         html = html + `<b>Typ:</b> ${TRANSLATION_DE.vending[item.subdata.vending]}<br>`
       }
       if(item.subdata["payment:none"] && item.subdata["payment:none"] != undefined) {
         html = html + `<b>${TRANSLATION_DE["payment:none"]["_"]}:</b> ${TRANSLATION_DE["payment:none"][item.subdata["payment:none"]]}<br>`
+      }
+      if(item.subdata["fee"] && item.subdata["fee"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["fee"["_"]]}:</b> ${TRANSLATION_DE["fee"][item.subdata["fee"]]}<br>`
       }
       //console.log(loc)
       //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
