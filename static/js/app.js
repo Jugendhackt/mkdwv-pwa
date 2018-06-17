@@ -82,6 +82,12 @@ const TRANSLATION_DE = {
     '_': 'Tunnel',
     'yes': 'Ja',
     'no': 'Nein'
+  },
+  'operator': {
+    '_': 'Betreiber'
+  },
+  'name': {
+    '_': 'Titel'
   }
 };
 
@@ -212,6 +218,12 @@ function populateByTrashcans(lat, lng, map) {
       }
       if(item.subdata["tunnel"] && item.subdata["tunnel"] != undefined) {
         html = html + `<b>${TRANSLATION_DE["tunnel"]["_"]}:</b> ${TRANSLATION_DE.tunnel[item.subdata["tunnel"]]}<br>`
+      }
+      if(item.subdata["operator"] && item.subdata["operator"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["operator"]["_"]}:</b> ${item.subdata["operator"]}<br>`
+      }
+      if(item.subdata["name"] && item.subdata["name"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["name"]["_"]}:</b> ${item.subdata["name"]}<br>`
       }
       //console.log(loc)
       //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
