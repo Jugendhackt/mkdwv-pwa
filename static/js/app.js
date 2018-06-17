@@ -57,6 +57,9 @@ const TRANSLATION_DE = {
   'waste': {
     '_': 'Müll',
     'trash': 'Müll'
+  },
+  'distance': {
+    '_': 'Entfernung'
   }
 };
 
@@ -153,6 +156,9 @@ function populateByTrashcans(lat, lng, map) {
       var loc = {
         'lat': item.latitude,
         'lng': item.longitude
+      }
+      if(item.distance_in_m && item.distance_in_m != undefined) {
+        html = html + `<b>${TRANSLATION_DE.distance["_"]}:</b> ${item.distance_in_m}m<br>`
       }
       if(item.subdata.vending && item.subdata.vending != undefined) {
         html = html + `<b>Typ:</b> ${TRANSLATION_DE.vending[item.subdata.vending]}<br>`
