@@ -178,12 +178,14 @@ function populateByTrashcans(lat, lng, map) {
     setMarkersFromLocations(LOCATIONS, map);
   }
 
+  document.getElementsByClassName("loader")[0].style.display = "block";
   var oReq = new XMLHttpRequest();
   oReq.addEventListener("load", reqListener);
   const requestUrl = `${TRASHCANS_ENDPOINT.uri}?position=${lat},${lng}`
   console.log(`Sending request to ${requestUrl}`)
   oReq.open("GET", requestUrl);
   oReq.send();
+  document.getElementsByClassName("loader")[0].style.display = "none";
 }
 
 
