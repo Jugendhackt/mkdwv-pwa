@@ -56,7 +56,7 @@ const TRANSLATION_DE = {
   },
   'waste': {
     '_': 'Müll',
-    'trash': 'Müll'
+    'trash': 'Mülleimer'
   },
   'distance': {
     '_': 'Entfernung'
