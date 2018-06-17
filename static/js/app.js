@@ -27,22 +27,36 @@ const ENDPOINTS = {
 // Maps
 const TRANSLATION_DE = {
   'vending': {
-    'excrement_bags': 'Exkremente'
+    'excrement_bags': 'Hundekottütenspender',
+    'drinks': 'Getränke'
   },
   'amenity': {
+    '_': 'Typ',
     'vending_machine': 'Pfandflaschenautomat',
     'waste_basket': 'Mülleimer'
   },
   'payment:none': {
+    '_': 'Keine Zahlung',
     'yes': 'Ja',
     'no': 'Nein'
   },
   'fee': {
+    '_': 'Kosten',
     'no': 'Nein',
     'yes': 'Ja'
   },
   'highway': {
+    '_': 'Bes.Ort',
     'bus_stop': 'Bushaltestelle'
+  },
+  'indoor': {
+    '_': 'Innen',
+    'yes': 'Ja',
+    'no': 'Nein'
+  },
+  'waste': {
+    '_': 'Müll',
+    'trash': 'Müll'
   }
 };
 
@@ -96,7 +110,7 @@ function getPointData(id) {
 
 function getTrashMapIcon() {
   var trashIcon = L.icon({
-    iconUrl: 'static/icons/icon.svg',
+    iconUrl: 'static/icons/icon3.svg',
 
     iconSize:     [32, 32], // size of the icon
     iconAnchor:   [20, 80], // point of the icon which will correspond to marker's location
@@ -110,7 +124,7 @@ function setMarker(id, map) {
   if(MAP_PROVIDER == "leaflet") {
     const data = getPointData(id);
     var marker = L.marker([data.lat,data.lng], {icon: getTrashMapIcon()}).addTo(map);
-		marker.bindPopup("<b>" + data.title + "</b>").openPopup();
+		marker.bindPopup(data.content).openPopup();
   }
 }
 
@@ -131,14 +145,24 @@ function populateByTrashcans(lat, lng, map) {
     const json = JSON.parse(respText);
     //console.log(json);
     for(var item of json) {
+      let subdata = JSON.parse(item.data)
+      item.subdata = subdata
+      let html = `<b>${item.trashBinID}</b><br>`
+      //console.log(subdata)
       //console.log(item)
       var loc = {
-        'title': item.trashBinID,
         'lat': item.latitude,
         'lng': item.longitude
       }
+      if(item.subdata.vending && item.subdata.vending != undefined) {
+        html = html + `<b>Typ:</b> ${TRANSLATION_DE.vending[item.subdata.vending]}<br>`
+      }
+      if(item.subdata["payment:none"] && item.subdata["payment:none"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["payment:none"]["_"]}:</b> ${TRANSLATION_DE["payment:none"][item.subdata["payment:none"]]}<br>`
+      }
       //console.log(loc)
       //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
+      loc.content = html
       LOCATIONS.push(loc);
     }
     //console.log(LOCATIONS);
@@ -147,7 +171,9 @@ function populateByTrashcans(lat, lng, map) {
 
   var oReq = new XMLHttpRequest();
   oReq.addEventListener("load", reqListener);
-  oReq.open("GET", `${TRASHCANS_ENDPOINT.uri}?position=${lat},${lng}`);
+  const requestUrl = `${TRASHCANS_ENDPOINT.uri}?position=${lat},${lng}`
+  console.log(`Sending request to ${requestUrl}`)
+  oReq.open("GET", requestUrl);
   oReq.send();
 }
 
