@@ -1,19 +1,28 @@
 var modal = document.getElementsByClassName("modal")[0];
 
-// Get the button that opens the modal
-var btn = document.getElementById("butAdd")[0];
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
+document.getElementById("butAdd").onclick = function() {
     modal.style.display = "block";
-    document.getElementById("content-add").innerHTML = "<h2>Hey!</h2>";
+    //document.getElementById("content-add").innerHTML = "<h2>Hey!</h2>";
+    document.getElementById("content-add").style.display = "block";
+    document.getElementById("content-settings").style.display = "none";
+    document.getElementById("content-highscore").style.display = "none";
+}
+document.getElementById("butSettings").onclick = function() {
+    modal.style.display = "block";
+    //document.getElementById("content-add").innerHTML = "<h2>Hey!</h2>";
+    document.getElementById("content-add").style.display = "none";
+    document.getElementById("content-settings").style.display = "block";
+    document.getElementById("content-highscore").style.display = "none";
+}
+document.getElementById("butHighscore").onclick = function() {
+    modal.style.display = "block";
+    //document.getElementById("content-add").innerHTML = "<h2>Hey!</h2>";
+    document.getElementById("content-add").style.display = "none";
+    document.getElementById("content-settings").style.display = "none";
+    document.getElementById("content-highscore").style.display = "block";
 }
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
+document.getElementsByClassName("close").onclick = function() {
     modal.style.display = "none";
 }
 
