@@ -51,8 +51,7 @@ header {
   transition: -webkit-transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
   transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
   transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s, -webkit-transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
-  z-index: 1;
-}
+  z-index: 1000; }
 
 header .headerButton {
   width: 24px;
@@ -79,19 +78,6 @@ header #butHighscore {
   margin: 0;
   flex: 1; }
 
-.loader {
-  left: 50%;
-  top: 50%;
-  position: fixed;
-  transform: translate(-50%, -50%); }
-
-.loader #spinner {
-  box-sizing: border-box;
-  stroke: #673AB7;
-  stroke-width: 3px;
-  transform-origin: 50%;
-  animation: line 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite, rotate 1.6s linear infinite; }
-
 main {
   padding-top: 60px;
   flex: 1;
@@ -101,10 +87,41 @@ main {
   display: flex;
   flex-direction: column; }
 
+main .top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+
+.loader {
+  margin-right: 10px;
+  height: 32px; }
+
+#spinner {
+  box-sizing: border-box;
+  stroke: #673AB7;
+  stroke-width: 3px;
+  transform-origin: 50%;
+  animation: line 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite, rotate 1.6s linear infinite; }
+
+@keyframes rotate {
+  from {
+    transform: rotate(0); }
+  to {
+    transform: rotate(450deg); } }
+@keyframes line {
+  0% {
+    stroke-dasharray: 2, 85.964;
+    transform: rotate(0); }
+  50% {
+    stroke-dasharray: 65.973, 21.9911;
+    stroke-dashoffset: 0; }
+  100% {
+    stroke-dasharray: 2, 85.964;
+    stroke-dashoffset: -65.973;
+    transform: rotate(90deg); } }
 #mapid {
   width: 100%;
   min-height: 40%;
-  z-index: 2;
   flex: 1 0; }
 
 p {

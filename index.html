@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
 	<title>Mit KOT die Welt verbessern - PWA</title>
 	<meta name="robots" content="noindex,follow">
+	<base ref="/kfdw-pwa/">
 	<link rel="icon" type="image/png" href="static/logo/logo-256x256.png" />
-	<base href="/kfdw-pwa/">
 	<link rel="manifest" href="/manifest.json">
 	<link rel="stylesheet" href="static/css/modal.css" type="text/css">
 	<link rel="stylesheet" href="static/css/app.css" type="text/css">
@@ -21,7 +21,14 @@
 		<button onclick="alert('highscore');" id="butHighscore" class="headerButton" aria-label="Highscore"></button>
 	</header>
 	<main>
-		<p>Auf dieser Karte sind Pinnadeln, welche Müll darstellen.</p>
+		<div class="top">
+			<p>Auf dieser Karte sind Pinnadeln, welche Müll darstellen.</p>
+			<div class="loader">
+				<svg viewBox="0 0 32 32" width="32" height="32">
+					<circle id="spinner" cx="16" cy="16" r="14" fill="none"></circle>
+				</svg>
+			</div>
+		</div>
 		<div id="mapid"></div>
 	</main>
 	<footer>
