@@ -36,7 +36,7 @@ const TRANSLATION_DE = {
     'waste_basket': 'Mülleimer'
   },
   'payment:none': {
-    '_': 'Keine Zahlung'
+    '_': 'Keine Zahlung',
     'yes': 'Ja',
     'no': 'Nein'
   },
@@ -156,6 +156,9 @@ function populateByTrashcans(lat, lng, map) {
       }
       if(item.subdata.vending && item.subdata.vending != undefined) {
         html = html + `<b>Typ:</b> ${TRANSLATION_DE.vending[item.subdata.vending]}<br>`
+      }
+      if(item.subdata["payment:none"] && item.subdata["payment:none"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["payment:none"]["_"]}:</b> ${TRANSLATION_DE["payment:none"][item.subdata["payment:none"]]}<br>`
       }
       //console.log(loc)
       //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
