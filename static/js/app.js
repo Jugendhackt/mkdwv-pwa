@@ -4,7 +4,7 @@ const DEBUG        = true;
 const MAP_PROVIDER = "leaflet";
 const TILE_URLS = {
   "default": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  "watercolor": "	http://c.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
+  "watercolor": "	http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
 }
 
 
@@ -165,6 +165,9 @@ function populateByTrashcans(lat, lng, map) {
       }
       if(item.subdata["payment:none"] && item.subdata["payment:none"] != undefined) {
         html = html + `<b>${TRANSLATION_DE["payment:none"]["_"]}:</b> ${TRANSLATION_DE["payment:none"][item.subdata["payment:none"]]}<br>`
+      }
+      if(item.subdata["fee"] && item.subdata["fee"] != undefined) {
+        html = html + `<b>${TRANSLATION_DE["fee"["_"]]}:</b> ${TRANSLATION_DE["fee"][item.subdata["fee"]]}<br>`
       }
       //console.log(loc)
       //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
