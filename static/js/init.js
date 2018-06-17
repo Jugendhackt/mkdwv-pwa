@@ -52,13 +52,6 @@ function initMap() {
   mymap.on('locationerror', onLocationError);
   mymap.locate({setView: true, maxZoom: 16});
 
-  L.Routing.control({
-	    waypoints: [
-		        L.latLng(57.74, 11.94),
-		        L.latLng(57.6792, 11.949)
-		      ]
-  }).addTo(mymap);
-
 navigator.geolocation.getCurrentPosition(position =>  {
   console.log(position);
   populateByTrashcans(Math.floor(position.coords.latitude * 1000)/1000, Math.floor(position.coords.longitude * 1000)/1000, mymap);
