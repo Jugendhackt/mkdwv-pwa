@@ -122,7 +122,8 @@ main .top {
 #mapid {
   width: 100%;
   min-height: 40%;
-  flex: 1 0; }
+  flex: 1 0;
+  z-index: 1; }
 
 p {
   margin: 15px 10px; }
