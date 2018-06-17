@@ -96,10 +96,10 @@ function getPointData(id) {
 
 function getTrashMapIcon() {
   var trashIcon = L.icon({
-    iconUrl: 'static/icons/trash.png',
+    iconUrl: 'static/icons/icon.svg',
 
     iconSize:     [32, 32], // size of the icon
-    iconAnchor:   [-20, 67], // point of the icon which will correspond to marker's location
+    iconAnchor:   [20, 80], // point of the icon which will correspond to marker's location
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
   });
   return trashIcon;
@@ -109,7 +109,7 @@ function setMarker(id, map) {
   //console.log(id)
   if(MAP_PROVIDER == "leaflet") {
     const data = getPointData(id);
-    var marker = L.marker([data.lat,data.lng]).addTo(map);
+    var marker = L.marker([data.lat,data.lng], {icon: getTrashMapIcon()}).addTo(map);
 		marker.bindPopup("<b>" + data.title + "</b>").openPopup();
   }
 }
