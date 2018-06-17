@@ -4,7 +4,8 @@ const DEBUG        = true;
 const MAP_PROVIDER = "leaflet";
 const TILE_URLS = {
   "default": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-  "watercolor": "	http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
+  "watercolor": "http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg",
+  "googlesat": "http://mt3.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
 }
 
 
