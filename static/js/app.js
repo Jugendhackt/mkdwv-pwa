@@ -8,7 +8,7 @@ const TILE_URLS = {
 }
 
 
-const BASE_URL = "http://151.216.10.34:8080"
+const BASE_URL = "https://kfdw.herokuapp.com"
 const ENDPOINTS = {
   'trash_upload': {
     'method': 'POST',
