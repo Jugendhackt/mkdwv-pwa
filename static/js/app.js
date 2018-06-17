@@ -5,7 +5,13 @@ const MAP_PROVIDER = "leaflet";
 const TILE_URLS = {
   "default": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
   "watercolor": "http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg",
-  "googlesat": "http://mt3.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"
+  "googlesat": "http://mt.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+  "googlehybrid": "http://mt.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+  "googleroadmap": "http://mt.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
+  "googleroads": "http://mt.google.com/vt/lyrs=h&x={x}&y={y}&z={z}",
+  "googleterrain": "http://mt.google.com/vt/lyrs=p&x={x}&y={y}&z={z}",
+  "googlealteredroad": "http://mt.google.com/vt/lyrs=r&x={x}&y={y}&z={z}",
+  "googleterrainonly": "http://mt.google.com/vt/lyrs=t&x={x}&y={y}&z={z}"
 }
 
 
