@@ -39,7 +39,7 @@ function initMap() {
   }
 
   function editmarker(){
-    //Methode: Popup öffnen
+        displayAdd;
         var msg = document.querySelector("#description").value;
 	  markerbindPopup(msg).openPopup;
 	//markerybindPopup(textfeld.getText, lat + " " + lng );
@@ -49,7 +49,7 @@ function initMap() {
   mymap.on('click', setMarker);
   mymap.on('locationfound', (e) => {updateLocation(e, mymap);});
   mymap.on('locationerror', onLocationError);
-  marker.on('onclick', displayAdd);
+  marker.on('onclick', editmarker);
   mymap.locate({setView: true, maxZoom: 16});
 
   L.Routing.control({
