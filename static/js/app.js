@@ -2,6 +2,10 @@
 // Settings
 const DEBUG        = true;
 const MAP_PROVIDER = "leaflet";
+const TILE_URLS = {
+  "default": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  "watercolor": "	http://c.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
+}
 
 
 const BASE_URL = "http://151.216.10.34:8080"
@@ -17,6 +21,28 @@ const ENDPOINTS = {
   'trashcans_fetch': {
     'method': 'GET',
     'uri': `${BASE_URL}/trashcans`
+  }
+};
+
+// Maps
+const TRANSLATION_DE = {
+  'vending': {
+    'excrement_bags': 'Exkremente'
+  },
+  'amenity': {
+    'vending_machine': 'Pfandflaschenautomat',
+    'waste_basket': 'Mülleimer'
+  },
+  'payment:none': {
+    'yes': 'Ja',
+    'no': 'Nein'
+  },
+  'fee': {
+    'no': 'Nein',
+    'yes': 'Ja'
+  },
+  'highway': {
+    'bus_stop': 'Bushaltestelle'
   }
 };
 

@@ -19,7 +19,7 @@ function updateLocation(e, map) {
 function initMap() {
   mymap = L.map('mapid').setView([50.104278, 8.675969], 13);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  L.tileLayer(TILE_URLS.watercolor, {
     maxZoom: 18,
     attribution: 'Implementation: <a href="https://github.com/jens1o">jens1o</a> | Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -30,7 +30,7 @@ function initMap() {
   function onLocationError(e) {
     alert(e.message);
   }
-  
+
   function getCoordinates(e){
       alert(e.latlng.lat +" " + e.latlng.lng);
   }
