@@ -19,7 +19,7 @@ function updateLocation(e, map) {
 function initMap() {
   mymap = L.map('mapid').setView([50.104278, 8.675969], 13);
 
-  L.tileLayer(TILE_URLS.watercolor, {
+  L.tileLayer(TILE_URLS.default, {
     maxZoom: 18,
     attribution: 'Implementation: <a href="https://github.com/jens1o">jens1o</a> | Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -43,13 +43,6 @@ function initMap() {
   mymap.on('locationerror', onLocationError);
 
   mymap.locate({setView: true, maxZoom: 16});
-
-  L.Routing.control({
-	    waypoints: [
-		        L.latLng(57.74, 11.94),
-		        L.latLng(57.6792, 11.949)
-		      ]
-  }).addTo(mymap);
 
 navigator.geolocation.getCurrentPosition(position =>  {
   console.log(position);
