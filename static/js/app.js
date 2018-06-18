@@ -172,44 +172,44 @@ function populateByTrashcans(lat, lng, map) {
         'lat': item.latitude,
         'lng': item.longitude
       }
-      if(item.distance_in_m && item.distance_in_m != undefined) {
+      if(item.distance_in_m) {
         const newDistance = (Math.floor(item.distance_in_m * 1000)/1000).toString().replace('.', ',')
         html = html + `<b>${TRANSLATION_DE.distance["_"]}:</b> ${newDistance}m<br>`
       }
-      if(item.subdata.vending && item.subdata.vending != undefined) {
+      if(item.subdata.vending) {
         html = html + `<b>Typ:</b> ${TRANSLATION_DE.vending[item.subdata.vending]}<br>`
       }
-      if(item.subdata["payment:none"] && item.subdata["payment:none"] != undefined) {
+      if(item.subdata["payment:none"]) {
         html = html + `<b>${TRANSLATION_DE["payment:none"]["_"]}:</b> ${TRANSLATION_DE["payment:none"][item.subdata["payment:none"]]}<br>`
       }
-      if(item.subdata["fee"] && item.subdata["fee"] != undefined) {
+      if(item.subdata["fee"]) {
         html = html + `<b>${TRANSLATION_DE["fee"]["_"]}:</b> ${TRANSLATION_DE["fee"][item.subdata["fee"]]}<br>`
       }
-      if(item.subdata["highway"] && item.subdata["highway"] != undefined) {
+      if(item.subdata["highway"]) {
         html = html + `<b>${TRANSLATION_DE["highway"]["_"]}:</b> ${TRANSLATION_DE["highway"][item.subdata["highway"]]}<br>`
       }
-      if(item.subdata["indoor"] && item.subdata["indoor"] != undefined) {
+      if(item.subdata["indoor"]) {
         html = html + `<b>${TRANSLATION_DE["indoor"]["_"]}:</b> ${TRANSLATION_DE["indoor"][item.subdata["indoor"]]}<br>`
       }
-      if(item.subdata["waste"] && item.subdata["waste"] != undefined) {
+      if(item.subdata["waste"]) {
         html = html + `<b>${TRANSLATION_DE["waste"]["_"]}:</b> ${TRANSLATION_DE["waste"][item.subdata["waste"]]}<br>`
       }
-      if(item.subdata["lastcheck"] && item.subdata["lastcheck"] != undefined) {
+      if(item.subdata["lastcheck"]) {
         html = html + `<b>${TRANSLATION_DE["lastcheck"]["_"]}:</b> ${item.subdata["lastcheck"]}<br>`
       }
-      if(item.subdata["level"] && item.subdata["level"] != undefined) {
+      if(item.subdata["level"]) {
         html = html + `<b>${TRANSLATION_DE["level"]["_"]}:</b> ${item.subdata["level"]}<br>`
       }
-      if(item.subdata["tourism"] && item.subdata["tourism"] != undefined) {
+      if(item.subdata["tourism"]) {
         html = html + `<b>${TRANSLATION_DE["tourism"]["_"]}:</b> ${TRANSLATION_DE.tourism[item.subdata["tourism"]]}<br>`
       }
-      if(item.subdata["tunnel"] && item.subdata["tunnel"] != undefined) {
+      if(item.subdata["tunnel"]) {
         html = html + `<b>${TRANSLATION_DE["tunnel"]["_"]}:</b> ${TRANSLATION_DE.tunnel[item.subdata["tunnel"]]}<br>`
       }
-      if(item.subdata["operator"] && item.subdata["operator"] != undefined) {
+      if(item.subdata["operator"]) {
         html = html + `<b>${TRANSLATION_DE["operator"]["_"]}:</b> ${item.subdata["operator"]}<br>`
       }
-      if(item.subdata["name"] && item.subdata["name"] != undefined) {
+      if(item.subdata["name"]) {
         html = html + `<b>${TRANSLATION_DE["name"]["_"]}:</b> ${item.subdata["name"]}<br>`
       }
       loc.content = html
@@ -220,11 +220,11 @@ function populateByTrashcans(lat, lng, map) {
 
   document.getElementsByClassName("loader")[0].style.display = "block";
   function stopLoading(){document.getElementsByClassName("loader")[0].style.display = "none";};
-  var oReq = new XMLHttpRequest();
+  var req = new XMLHttpRequest(;
   const requestUrl = `${TRASHCANS_ENDPOINT.uri}?position=${lat},${lng}`
   console.log(`Sending request to ${requestUrl}`)
-  oReq.open("GET", requestUrl, true);
-  oReq.onload = () => {reqListener(oReq.responseText);stopLoading();};
-  oReq.onerror = () => {console.error(":)"+oReq.statusText);stopLoading();};
-  oReq.send();
+  req.open("GET", requestUrl, true);
+  req.onload = () => {reqListener(req.responseText);stopLoading();};
+  req.onerror = () => {console.error(":)"+req.statusText);stopLoading();};
+  req.send();
 }
