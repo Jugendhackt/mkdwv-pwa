@@ -1,6 +1,4 @@
-
 // Settings
-const DEBUG        = true;
 const MAP_PROVIDER = "leaflet";
 const TILE_URLS = {
   "default": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -121,9 +119,6 @@ let LOCATIONS = {
 
 let LOCATIONS = [];
 
-////console.log(LOCATIONS);
-
-
 
 function webtest() {
   return navigator.onLine;
@@ -135,9 +130,8 @@ function getPointData(id) {
   return LOCATIONS[id];
 }
 
-
-////console.log(getPointData(1));
-////console.log(getPointData(0));
+//console.log(getPointData(1));
+//console.log(getPointData(0));
 
 function getTrashMapIcon() {
   var trashIcon = L.icon({
@@ -151,7 +145,6 @@ function getTrashMapIcon() {
 }
 
 function setMarker(id, map) {
-  //console.log(id)
   if(MAP_PROVIDER == "leaflet") {
     const data = getPointData(id);
     var marker = L.marker([data.lat,data.lng], {icon: getTrashMapIcon()}).addTo(map);
@@ -164,22 +157,17 @@ function setMarkersFromLocations(locations, map) {
     if (key % 15 === 0) {
       console.log(key);
     }
-    //debugger;
     setMarker(key, map);
   });
 }
 
 function populateByTrashcans(lat, lng, map) {
   function reqListener (respText) {
-    //console.log(this.responseText);
     const json = JSON.parse(respText);
-    //console.log(json);
     for(var item of json) {
       let subdata = JSON.parse(item.data)
       item.subdata = subdata
       let html = `<b>ID:</b> ${item.trashBinID}<br>`
-      //console.log(subdata)
-      //console.log(item)
       var loc = {
         'lat': item.latitude,
         'lng': item.longitude
@@ -224,12 +212,9 @@ function populateByTrashcans(lat, lng, map) {
       if(item.subdata["name"] && item.subdata["name"] != undefined) {
         html = html + `<b>${TRANSLATION_DE["name"]["_"]}:</b> ${item.subdata["name"]}<br>`
       }
-      //console.log(loc)
-      //LOCATIONS[Math.max(Object.keys(LOCATIONS)) + 1]
       loc.content = html
       LOCATIONS.push(loc);
     }
-    //console.log(LOCATIONS);
     setMarkersFromLocations(LOCATIONS, map);
   }
 
@@ -242,28 +227,4 @@ function populateByTrashcans(lat, lng, map) {
   oReq.onload = () => {reqListener(oReq.responseText);stopLoading();};
   oReq.onerror = () => {console.error(":)"+oReq.statusText);stopLoading();};
   oReq.send();
-}
-
-
-
-
-debugSequence();
-
-
-
-
-
-
-
-// DEBUG LOGGER
-function debugSequence() {
-  if(DEBUG) {
-    // Log endpoints
-    //console.log(`Upload endpoint:`);
-    //console.log(UPLOAD_ENDPOINT);
-    //console.log(`Trashcans endpoint:`);
-    //console.log(TRASHCANS_ENDPOINT);
-    //console.log(`Trash endpoint:`);
-    //console.log(TRASH_ENDPOINT);
-  }
 }
