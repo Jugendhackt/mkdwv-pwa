@@ -30,30 +30,24 @@ function initMap() {
     alert(e.message);
   }
 
-
-  function editmarker(){
-        displayAdd();
-        var msg = document.querySelector("#description").value;
-	  markerbindPopup(msg).openPopup;
-	//markerybindPopup(textfeld.getText, lat + " " + lng );
-  }
-      function setMarker(e){
+  function setMarker(e){
       var lat = e.latlng.lat;
       var lng = e.latlng.lng;
-       var marker = L.marker([lat, lng]).on('click', editmarker).addTo(mymap);
-       marker.bindPopup(lat + " " + lng).openPopup();
-       marker;
+      var marker = L.marker([lat, lng]).on('click', () => {
+          displayAdd();
+          //var msg = document.querySelector("#description").value;
+	  //marker.bindPopup(msg).openPopup();
+      }).addTo(mymap);
+      marker.bindPopup(lat + " " + lng).openPopup();
   }
-
-
 
   mymap.on('click', setMarker);
   mymap.on('locationfound', (e) => {updateLocation(e, mymap);});
   mymap.on('locationerror', onLocationError);
   mymap.locate({setView: true, maxZoom: 16});
 
-navigator.geolocation.getCurrentPosition(position =>  {
-  console.log(position);
-  populateByTrashcans(Math.floor(position.coords.latitude * 1000)/1000, Math.floor(position.coords.longitude * 1000)/1000, mymap);
-})
+  navigator.geolocation.getCurrentPosition(position =>  {
+    console.log(position);
+    populateByTrashcans(Math.floor(position.coords.latitude * 1000)/1000, Math.floor(position.coords.longitude * 1000)/1000, mymap);
+  })
 }
