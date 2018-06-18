@@ -170,9 +170,8 @@ function setMarkersFromLocations(locations, map) {
 }
 
 function populateByTrashcans(lat, lng, map) {
-  function reqListener () {
+  function reqListener (respText) {
     //console.log(this.responseText);
-    const respText = this.responseText
     const json = JSON.parse(respText);
     //console.log(json);
     for(var item of json) {
@@ -235,13 +234,14 @@ function populateByTrashcans(lat, lng, map) {
   }
 
   document.getElementsByClassName("loader")[0].style.display = "block";
+  function stopLoading(){document.getElementsByClassName("loader")[0].style.display = "none";};
   var oReq = new XMLHttpRequest();
-  oReq.addEventListener("load", reqListener);
   const requestUrl = `${TRASHCANS_ENDPOINT.uri}?position=${lat},${lng}`
   console.log(`Sending request to ${requestUrl}`)
-  oReq.open("GET", requestUrl);
+  oReq.open("GET", requestUrl, true);
+  oReq.onload = () => {reqListener(oReq.responseText);stopLoading();};
+  oReq.onerror = () => {console.error(":)"+oReq.statusText);stopLoading();};
   oReq.send();
-  document.getElementsByClassName("loader")[0].style.display = "none";
 }
 
 
