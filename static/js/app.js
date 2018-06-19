@@ -174,15 +174,15 @@ function populateByTrashcans(lat, lng, map) {
         'lng': item.longitude
       }
       if(item.distance_in_m) {
-        const newDistance = (Math.floor(item.distance_in_m * 1000)/1000).toString().replace('.', ',')
+        const newDistance = (Math.round(item.distance_in_m * 10)/10).toString().replace('.', ',')
         html += `<b>${TRANSLATION_DE.distance["_"]}:</b> ${newDistance}m<br>`
       }
       var tags = ["vending", "payment:none","fee","highway","indoor","waste","_lastcheck","_level","tourism","tunnel","_operator","_name"];
       for(var tag of tags) {
-        let numerical = tag.chatAt(0)=='_'
+        let numerical = tag.charAt(0)=='_'
 				if(numerical) tag = tag.substr(1);
         if(item.subdata[tag]) {
-          html += `<b>${TRANSLATION_DE[tag]["_"]}:</b>`;
+          html += `<b>${TRANSLATION_DE[tag]["_"]}:</b> `;
 					if(numerical) html += `${item.subdata[tag]}<br>`
 					else html += `${TRANSLATION_DE[tag][item.subdata[tag]]}<br>`
         }
