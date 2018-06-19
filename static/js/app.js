@@ -155,7 +155,6 @@ function setMarker(id, map) {
 		popup.on("popupopen", () => {marker.setIcon(trashcanSIcon)})
 		popup.on("popupclose", () => {marker.setIcon(trashcanIcon)})
 		popup.openPopup();
-		//marker.on("click", (e) => {handleSelection(trashcanIcon, trashcanSIcon, e)});
   }
 }
 
