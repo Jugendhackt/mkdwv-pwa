@@ -134,22 +134,28 @@ function getPointData(id) {
 //console.log(getPointData(1));
 //console.log(getPointData(0));
 
-function getTrashMapIcon() {
-  var trashIcon = L.icon({
-    iconUrl: 'static/icons/icon3.svg',
+var trashcanIcon = L.icon({
+  iconUrl: 'static/icons/icon3.svg',
 
-    iconSize:     [32, 32], // size of the icon
-    iconAnchor:   [16, 16], // point of the icon which will correspond to marker's location
-    popupAnchor:  [0, -18] // point from which the popup should open relative to the iconAnchor
-  });
-  return trashIcon;
-}
+  iconSize:     [32, 32], // size of the icon
+  iconAnchor:   [16, 16], // point of the icon which will correspond to marker's location
+  popupAnchor:  [0, -18] // point from which the popup should open relative to the iconAnchor
+});
+
+var trashcanSIcon = L.icon(Object.assign({}, trashcanIcon.options, {
+	shadowUrl: 'static/icons/trashcan_shadow.png',
+	shadowAnchor: [64, 64]
+}));
 
 function setMarker(id, map) {
   if(MAP_PROVIDER == "leaflet") {
     const data = getPointData(id);
-    var marker = L.marker([data.lat,data.lng], {icon: getTrashMapIcon()}).addTo(map);
-		marker.bindPopup(data.content).openPopup();
+    var marker = L.marker([data.lat,data.lng], {icon: trashcanIcon}).addTo(map);
+		var popup = marker.bindPopup(data.content);
+		popup.on("popupopen", () => {marker.setIcon(trashcanSIcon)})
+		popup.on("popupclose", () => {marker.setIcon(trashcanIcon)})
+		popup.openPopup();
+		//marker.on("click", (e) => {handleSelection(trashcanIcon, trashcanSIcon, e)});
   }
 }
 
