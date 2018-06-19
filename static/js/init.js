@@ -16,6 +16,21 @@ function updateLocation(e, map) {
   L.circle(e.latlng, radius).addTo(map);
 }
 
+
+mapnikLayer = L.tileLayer(
+	    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+	    {attribution: attribution}
+)
+var blackAndWhite = L.tileLayer(
+	    'http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png',
+	    {attribution: attribution}
+)
+var clouds = L.tileLayer('http://{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png', {
+	    attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
+	    opacity: 0.5
+})
+
+
 function initMap() {
   mymap = L.map('mapid').setView([50.104278, 8.675969], 13);
 
@@ -23,12 +38,25 @@ function initMap() {
     maxZoom: 18,
     attribution: 'Implementation: <a href="https://github.com/jens1o">jens1o</a> | Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-    id: 'mapbox.streets'
+    id: 'mapbox.streets', layers: [mapnikLayer, clouds]
   }).addTo(mymap);
+
+  var baseLayers = {
+	      'Mapnik': mapnikLayer,
+	      'Black and Whilte': blackAndWhite
+  }
+
+  var overlayLayers = {
+	      'Clouds': clouds
+  }
+
 
   function onLocationError(e) {
     alert(e.message);
   }
+
+  var control = L.control.selectLayers(baseLayers, overlayLayers)
+	control.addTo(map)
 
   function setMarker(e){
       var lat = e.latlng.lat;
