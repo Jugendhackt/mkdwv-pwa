@@ -139,7 +139,7 @@ function getTrashMapIcon() {
     iconUrl: 'static/icons/icon3.svg',
 
     iconSize:     [32, 32], // size of the icon
-    iconAnchor:   [20, 80], // point of the icon which will correspond to marker's location
+    iconAnchor:   [16, 16], // point of the icon which will correspond to marker's location
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
   });
   return trashIcon;
