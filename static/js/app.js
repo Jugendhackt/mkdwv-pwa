@@ -32,6 +32,7 @@ const ENDPOINTS = {
 // Maps
 const TRANSLATION_DE = {
   'vending': {
+		'_': 'Typ',
     'excrement_bags': 'Hundekottütenspender',
     'drinks': 'Getränke'
   },
@@ -176,10 +177,7 @@ function populateByTrashcans(lat, lng, map) {
         const newDistance = (Math.floor(item.distance_in_m * 1000)/1000).toString().replace('.', ',')
         html += `<b>${TRANSLATION_DE.distance["_"]}:</b> ${newDistance}m<br>`
       }
-      if(item.subdata.vending) {
-        html += `<b>Typ:</b> ${TRANSLATION_DE.vending[item.subdata.vending]}<br>`
-      }
-      var tags = ["payment:none","fee","highway","indoor","waste","_lastcheck","_level","tourism","tunnel","_operator","_name"];
+      var tags = ["vending", "payment:none","fee","highway","indoor","waste","_lastcheck","_level","tourism","tunnel","_operator","_name"];
       for(var tag of tags) {
         let numerical = tag.chatAt(0)=='_'
 				if(numerical) tag = tag.substr(1);
@@ -196,12 +194,12 @@ function populateByTrashcans(lat, lng, map) {
   }
 
   document.getElementsByClassName("loader")[0].style.display = "block";
-  function stopLoading(){document.getElementsByClassName("loader")[0].style.display = "none";};
+  function stopLoading(){document.getElementsByClassName("loader")[0].style.display = "none";}
   var req = new XMLHttpRequest();
   const requestUrl = `${TRASHCANS_ENDPOINT.uri}?position=${lat},${lng}`;
   console.log(`Sending request to ${requestUrl}`)
   req.open("GET", requestUrl, true);
   req.onload = () => {reqListener(req.responseText);stopLoading();};
-  req.onerror = () => {console.error(":)"+req.statusText);stopLoading();};
+  req.onerror = () => {console.error(req.statusText);stopLoading();};
   req.send();
 }
