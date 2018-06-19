@@ -1,9 +1,8 @@
 console.log("Loading webtest...");
 const webtestResult = webtest();
 
-if(!webtestResult) {
-  console.error("Webtest failed! Response: " + webtestResult);
-} else console.log("Webtest success!");
+if(!webtestResult) console.error("Webtest failed! Response: " + webtestResult);
+else console.log("Webtest success!");
 
 var mymap;
 
@@ -17,18 +16,17 @@ function updateLocation(e, map) {
 }
 
 
-mapnikLayer = L.tileLayer(
-	    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-	    {attribution: attribution}
-)
+var mapnikLayer = L.tileLayer(
+	'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+);
 var blackAndWhite = L.tileLayer(
-	    'http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png',
-	    {attribution: attribution}
-)
-var clouds = L.tileLayer('http://{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png', {
-	    attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>',
-	    opacity: 0.5
-})
+	'http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png'
+);
+/* REQUIRES API KEY / PAYMENT
+var clouds = L.tileLayer(
+  'http://{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png',
+	{attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>', opacity: 0.5}
+)*/
 
 
 function initMap() {
@@ -36,9 +34,9 @@ function initMap() {
 
   L.tileLayer(TILE_URLS.default, {
     maxZoom: 18,
-    attribution: 'Implementation: <a href="https://github.com/jens1o">jens1o</a> | Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-    id: 'mapbox.streets', layers: [mapnikLayer, clouds]
+    id: 'mapbox.streets', layers: [mapnikLayer]
   }).addTo(mymap);
 
   var baseLayers = {
@@ -47,7 +45,7 @@ function initMap() {
   }
 
   var overlayLayers = {
-	      'Clouds': clouds
+	      //'Clouds': clouds
   }
 
 
@@ -55,8 +53,8 @@ function initMap() {
     alert(e.message);
   }
 
-  var control = L.control.selectLayers(baseLayers, overlayLayers)
-	control.addTo(map)
+  var control = L.control.layers(baseLayers, overlayLayers)
+	control.addTo(mymap)
 
   function setMarker(e){
       var lat = e.latlng.lat;
@@ -64,7 +62,7 @@ function initMap() {
       var marker = L.marker([lat, lng]).on('click', () => {
           displayAdd();
           //var msg = document.querySelector("#description").value;
-	  //marker.bindPopup(msg).openPopup();
+	        //marker.bindPopup(msg).openPopup();
       }).addTo(mymap);
       marker.bindPopup(lat + " " + lng).openPopup();
   }
