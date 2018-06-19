@@ -197,8 +197,8 @@ function populateByTrashcans(lat, lng, map) {
 
   document.getElementsByClassName("loader")[0].style.display = "block";
   function stopLoading(){document.getElementsByClassName("loader")[0].style.display = "none";};
-  var req = new XMLHttpRequest(;
-  const requestUrl = `${TRASHCANS_ENDPOINT.uri}?position=${lat},${lng}`
+  var req = new XMLHttpRequest();
+  const requestUrl = `${TRASHCANS_ENDPOINT.uri}?position=${lat},${lng}`;
   console.log(`Sending request to ${requestUrl}`)
   req.open("GET", requestUrl, true);
   req.onload = () => {reqListener(req.responseText);stopLoading();};
