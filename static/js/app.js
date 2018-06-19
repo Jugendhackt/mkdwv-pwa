@@ -174,43 +174,20 @@ function populateByTrashcans(lat, lng, map) {
       }
       if(item.distance_in_m) {
         const newDistance = (Math.floor(item.distance_in_m * 1000)/1000).toString().replace('.', ',')
-        html = html + `<b>${TRANSLATION_DE.distance["_"]}:</b> ${newDistance}m<br>`
+        html += `<b>${TRANSLATION_DE.distance["_"]}:</b> ${newDistance}m<br>`
       }
       if(item.subdata.vending) {
-        html = html + `<b>Typ:</b> ${TRANSLATION_DE.vending[item.subdata.vending]}<br>`
+        html += `<b>Typ:</b> ${TRANSLATION_DE.vending[item.subdata.vending]}<br>`
       }
-      if(item.subdata["payment:none"]) {
-        html = html + `<b>${TRANSLATION_DE["payment:none"]["_"]}:</b> ${TRANSLATION_DE["payment:none"][item.subdata["payment:none"]]}<br>`
-      }
-      if(item.subdata["fee"]) {
-        html = html + `<b>${TRANSLATION_DE["fee"]["_"]}:</b> ${TRANSLATION_DE["fee"][item.subdata["fee"]]}<br>`
-      }
-      if(item.subdata["highway"]) {
-        html = html + `<b>${TRANSLATION_DE["highway"]["_"]}:</b> ${TRANSLATION_DE["highway"][item.subdata["highway"]]}<br>`
-      }
-      if(item.subdata["indoor"]) {
-        html = html + `<b>${TRANSLATION_DE["indoor"]["_"]}:</b> ${TRANSLATION_DE["indoor"][item.subdata["indoor"]]}<br>`
-      }
-      if(item.subdata["waste"]) {
-        html = html + `<b>${TRANSLATION_DE["waste"]["_"]}:</b> ${TRANSLATION_DE["waste"][item.subdata["waste"]]}<br>`
-      }
-      if(item.subdata["lastcheck"]) {
-        html = html + `<b>${TRANSLATION_DE["lastcheck"]["_"]}:</b> ${item.subdata["lastcheck"]}<br>`
-      }
-      if(item.subdata["level"]) {
-        html = html + `<b>${TRANSLATION_DE["level"]["_"]}:</b> ${item.subdata["level"]}<br>`
-      }
-      if(item.subdata["tourism"]) {
-        html = html + `<b>${TRANSLATION_DE["tourism"]["_"]}:</b> ${TRANSLATION_DE.tourism[item.subdata["tourism"]]}<br>`
-      }
-      if(item.subdata["tunnel"]) {
-        html = html + `<b>${TRANSLATION_DE["tunnel"]["_"]}:</b> ${TRANSLATION_DE.tunnel[item.subdata["tunnel"]]}<br>`
-      }
-      if(item.subdata["operator"]) {
-        html = html + `<b>${TRANSLATION_DE["operator"]["_"]}:</b> ${item.subdata["operator"]}<br>`
-      }
-      if(item.subdata["name"]) {
-        html = html + `<b>${TRANSLATION_DE["name"]["_"]}:</b> ${item.subdata["name"]}<br>`
+      var tags = ["payment:none","fee","highway","indoor","waste","_lastcheck","_level","tourism","tunnel","_operator","_name"];
+      for(var tag of tags) {
+        let numerical = tag.chatAt(0)=='_'
+				if(numerical) tag = tag.substr(1);
+        if(item.subdata[tag]) {
+          html += `<b>${TRANSLATION_DE[tag]["_"]}:</b>`;
+					if(numerical) html += `${item.subdata[tag]}<br>`
+					else html += `${TRANSLATION_DE[tag][item.subdata[tag]]}<br>`
+        }
       }
       loc.content = html
       LOCATIONS.push(loc);
