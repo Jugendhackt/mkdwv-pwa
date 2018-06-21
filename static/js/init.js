@@ -22,12 +22,10 @@ var mapnikLayer = L.tileLayer(
 var blackAndWhite = L.tileLayer(
 	'http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png'
 );
-/* REQUIRES API KEY / PAYMENT
-var clouds = L.tileLayer(
-  'http://{s}.tile.openweathermap.org/map/clouds/{z}/{x}/{y}.png',
-	{attribution: 'Map data &copy; <a href="http://openweathermap.org">OpenWeatherMap</a>', opacity: 0.5}
-)*/
 
+var watercolorLayer = L.tileLayer(
+	'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg'
+);
 
 function initMap() {
   mymap = L.map('mapid').setView([50.104278, 8.675969], 13);
@@ -41,19 +39,16 @@ function initMap() {
 
   var baseLayers = {
 	      'Mapnik': mapnikLayer,
-	      'Black and Whilte': blackAndWhite
+	      'Black and Whilte': blackAndWhite,
+	      'Watercolor': watercolorLayer
   }
-
-  var overlayLayers = {
-	      //'Clouds': clouds
-  }
-
+  
 
   function onLocationError(e) {
     alert(e.message);
   }
 
-  var control = L.control.layers(baseLayers, overlayLayers)
+  var control = L.control.layers(baseLayers)
 	control.addTo(mymap)
 
   function setMarker(e){
