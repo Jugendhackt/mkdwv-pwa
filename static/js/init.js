@@ -6,16 +6,6 @@ else console.log("Webtest success!");
 
 var mymap;
 
-function updateLocation(e, map) {
-  var radius = e.accuracy / 2;
-
-  L.marker(e.latlng).addTo(map)
-    .bindPopup("<b>Dein ungefährer Standort</b>").openPopup();
-
-  L.circle(e.latlng, radius).addTo(map);
-}
-
-
 var mapnikLayer = L.tileLayer(
 	'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 );
@@ -43,6 +33,17 @@ function initMap() {
 	      'Watercolor': watercolorLayer
   }
   
+  var posmarker, poscircle;
+  function updateLocation(e, map) {
+    var radius = e.accuracy / 2;
+  
+    if(posmarker) map.removeLayer(posmarker);
+    posmarker = L.marker(e.latlng).addTo(map);
+    posmarker.bindPopup("<b>Dein ungefährer Standort</b>").openPopup();
+  
+    if(poscircle) map.removeLayer(poscircle);
+    poscircle = L.circle(e.latlng, radius).addTo(map);
+  }
 
   function onLocationError(e) {
     alert(e.message);
