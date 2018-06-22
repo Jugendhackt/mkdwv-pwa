@@ -65,7 +65,7 @@ function initMap() {
   mymap.on('click', setMarker);
   mymap.on('locationfound', (e) => {updateLocation(e, mymap);});
   mymap.on('locationerror', onLocationError);
-  mymap.locate({setView: true, maxZoom: 16});
+  mymap.locate({watch: true, setView: true, maxZoom: 16});
 
   navigator.geolocation.getCurrentPosition(position =>  {
     console.log(position);
