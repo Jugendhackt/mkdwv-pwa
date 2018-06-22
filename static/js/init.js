@@ -33,16 +33,21 @@ function initMap() {
 	      'Watercolor': watercolorLayer
   }
   
-  var posmarker, poscircle;
+  var posmarker, poscircle, firstcheck = true;
   function updateLocation(e, map) {
     var radius = e.accuracy / 2;
   
     if(posmarker) map.removeLayer(posmarker);
-    posmarker = L.marker(e.latlng).addTo(map);
-    posmarker.bindPopup("<b>Dein ungefährer Standort</b>").openPopup();
+    posmarker = L.marker(e.latlng, {autoPan: false}).addTo(map);
+    posmarker.bindPopup("<b>Dein ungefährer Standort</b>", {autoPan: false}).openPopup();
   
     if(poscircle) map.removeLayer(poscircle);
     poscircle = L.circle(e.latlng, radius).addTo(map);
+    
+    if(firstcheck) {
+      mymap.locate({enableHighAccuracy: true, watch: true, setView: false});
+      firstcheck = false;
+    }
   }
 
   function onLocationError(e) {
@@ -66,7 +71,7 @@ function initMap() {
   mymap.on('click', setMarker);
   mymap.on('locationfound', (e) => {updateLocation(e, mymap);});
   mymap.on('locationerror', onLocationError);
-  mymap.locate({watch: true, setView: true, maxZoom: 16});
+  mymap.locate({enableHighAccuracy: true, watch: false, setView: true, maxZoom: 16});
 
   navigator.geolocation.getCurrentPosition(position =>  {
     console.log(position);
