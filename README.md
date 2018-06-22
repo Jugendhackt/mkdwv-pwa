@@ -13,4 +13,4 @@
  und findet leider keinen Mülleimer für den Kot seines Hundes.
 
 [hackdash](https://hackdash.org/projects/5b24d20335377d7f73a9a49f) / 
-[Webdemo](https://jugendhackt.github.io/mcdwv-pwa)
+[Webdemo](https://jugendhackt.github.io/mkdwv-pwa)
