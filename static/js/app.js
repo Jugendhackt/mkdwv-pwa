@@ -95,21 +95,7 @@ const UPLOAD_ENDPOINT    = ENDPOINTS.trash_upload; // Upload endpoint
 const TRASHCANS_ENDPOINT = ENDPOINTS.trashcans_fetch; // Trashcans endpoint
 const TRASH_ENDPOINT     = ENDPOINTS.trash_fetch; // Trash endpoint
 
-/*
-let LOCATIONS = {
-  1: {
-    'title': 'Museum für Kommunikation',
-    'lat': 50.104278,
-    'lng': 8.675969
-  },
-  2: {
-    'title': 'Dönerboot',
-    'lat': 50.106136,
-    'lng': 8.678191
-  }
-};
-*/
-
+//array of {title,lat,lng} elements
 let LOCATIONS = [];
 
 
