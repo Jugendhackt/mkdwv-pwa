@@ -166,8 +166,12 @@ function populateByTrashcans(lat, lng, map) {
 				if(numerical) tag = tag.substr(1);
         if(item.subdata[tag]) {
           html += `<b>${TRANSLATION_DE[tag]["_"]}:</b> `;
-					if(numerical) html += `${item.subdata[tag]}<br>`
-					else html += `${TRANSLATION_DE[tag][item.subdata[tag]]}<br>`
+					if(numerical)
+            html += `${item.subdata[tag]}<br>`;
+					else if(TRANSLATION_DE[tag])
+            html += `${TRANSLATION_DE[tag][item.subdata[tag]]}<br>`;
+          else
+            html += `${item.subdata[tag]}<br>`;
         }
       }
       loc.content = html
