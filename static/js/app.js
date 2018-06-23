@@ -62,7 +62,8 @@ const TRANSLATION_DE = {
   },
   'waste': {
     '_': 'Müll',
-    'trash': 'Mülleimer'
+    'trash': 'Mülleimer',
+    'dog_excrement': 'Hundekot'
   },
   'distance': {
     '_': 'Entfernung'
@@ -90,18 +91,9 @@ const TRANSLATION_DE = {
   }
 };
 
-// Endpoint list
-/*
-let UPLOAD_ENDPOINT = {}
-let TRASHCANS_ENDPOINT = {}
-let TRASH_ENDPOINT = {}
-*/
-
 const UPLOAD_ENDPOINT    = ENDPOINTS.trash_upload; // Upload endpoint
 const TRASHCANS_ENDPOINT = ENDPOINTS.trashcans_fetch; // Trashcans endpoint
 const TRASH_ENDPOINT     = ENDPOINTS.trash_fetch; // Trash endpoint
-
-
 
 /*
 let LOCATIONS = {
