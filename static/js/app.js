@@ -136,6 +136,18 @@ function setMarker(id, map) {
   }
 }
 
+  //new function should print the coordinates, ... more likely	
+  function shownearestTrashcan(){
+    var test = Object.keys(LOCATIONS).map(function(key){
+      return [Number(key), LOCATIONS[key]];
+  }); 
+  console.log(test);
+  test.toString()	  
+  document.getElementById("search-output").innerHTML = test[0];
+ } 
+	  
+
+
 function setMarkersFromLocations(locations, map) {
   Object.keys(locations).forEach(function(key) {
     if (key % 15 === 0) {
@@ -144,7 +156,6 @@ function setMarkersFromLocations(locations, map) {
     setMarker(key, map);
   });
 }
-
 function populateByTrashcans(lat, lng, map) {
   function reqListener (respText) {
     const json = JSON.parse(respText);
@@ -158,9 +169,11 @@ function populateByTrashcans(lat, lng, map) {
       }
       if(item.distance_in_m) {
         const newDistance = (Math.round(item.distance_in_m * 10)/10).toString().replace('.', ',')
-        html += `<b>${TRANSLATION_DE.distance["_"]}:</b> ${newDistance}m<br>`
-      }
+        html += `<b>${TRANSLATION_DE.distance["_"]}:</b> <b>${newDistance} m</b>`
+	html += `<br> <button type="button" onclick="shownearestTrashcan()" id="show_nearest_trashcan">Anzeigen</button>  <button>Route berechnen</button> <br>`     
+      }	
       var tags = ["vending", "payment:none","fee","highway","indoor","waste","_lastcheck","_level","tourism","tunnel","_operator","_name"];
+
       for(var tag of tags) {
         let numerical = tag.charAt(0)=='_'
 				if(numerical) tag = tag.substr(1);
@@ -172,14 +185,17 @@ function populateByTrashcans(lat, lng, map) {
             html += `${TRANSLATION_DE[tag][item.subdata[tag]]}<br>`;
           else
             html += `${item.subdata[tag]}<br>`;
+
         }
       }
       loc.content = html
       LOCATIONS.push(loc);
     }
-    setMarkersFromLocations(LOCATIONS, map);
+    document.getElementById("search-output").innerHTML = JSON.stringify(LOCATIONS, null, 4);
+      setMarkersFromLocations(LOCATIONS, map);
   }
 
+  	  
   document.getElementsByClassName("loader")[0].style.display = "block";
   function stopLoading(){document.getElementsByClassName("loader")[0].style.display = "none";}
   var req = new XMLHttpRequest();
@@ -189,4 +205,4 @@ function populateByTrashcans(lat, lng, map) {
   req.onload = () => {reqListener(req.responseText);stopLoading();};
   req.onerror = () => {console.error(req.statusText);stopLoading();};
   req.send();
-}
+} 

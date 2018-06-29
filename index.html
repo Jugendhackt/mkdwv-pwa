@@ -11,11 +11,13 @@
 	<link rel="stylesheet" href="static/css/app.css" type="text/css">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+	 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 
 </head>
 <body>
 	<header>
 		<h1 class="title">Mit KOT die Welt verbessern</h1>
+                <button onclick="alert('search');" id="butSearch" class="headerButton" aria-label="Search"></button>	
 		<button onclick="alert('add');" id="butAdd" class="headerButton" aria-label="Add"></button>
 		<button onclick="alert('settings');" id="butSettings" class="headerButton" aria-label="Settings"></button>
 		<button onclick="alert('highscore');" id="butHighscore" class="headerButton" aria-label="Highscore"></button>
@@ -40,6 +42,8 @@
 	<div class="modal">
 		<div class="modal-content">
 			<span class="close">&times;</span>
+			
+					
 			<div id="content-add">
 				<h3>Müll melden</h3>
 				<p>Eigenschaften/Beschreibung des Mülls:</p>
@@ -56,7 +60,9 @@
 				<button type="button" id="new_waste">Senden</button>
 				<button type="button" id="start_route">Route berechnen</button>
 			</div>
+			
 			<div id="content-settings">content-settings</div>
+			
 			<div id="content-highscore">
 				<p><b>Deine Punktzahl:</b> 4 Punkte</p>
 				<ol>
@@ -66,6 +72,10 @@
 					<li><b>lugirl67:</b> 11 Punkte</li>
 					<li><b>marvmagix:</b> 6 Punkte</li>
 				</ol>
+			</div>
+			<div id="content-search">
+				<p><b>Mülleimer in deiner Nähe</b></p>
+				<p id="search-output"></p>
 			</div>
 		</div>
 	</div>
@@ -78,3 +88,4 @@
 	<script src="static/js/init.js" onload="javascript:initMap();"></script>
 </body>
 </html>
+
