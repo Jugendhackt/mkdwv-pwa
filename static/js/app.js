@@ -165,7 +165,7 @@ function populateByTrashcans(lat, lng, map) {
         let numerical = tag.charAt(0)=='_'
 				if(numerical) tag = tag.substr(1);
         if(item.subdata[tag]) {
-          html += `<b>${TRANSLATION_DE[tag]["_"]}:</b> `;
+          html += `<br><b>${TRANSLATION_DE[tag]["_"]}:</b> `;
 					if(numerical)
             html += `${item.subdata[tag]}`;
 					else if(TRANSLATION_DE[tag])
@@ -175,7 +175,7 @@ function populateByTrashcans(lat, lng, map) {
 
         }
       }
-	    html += `<br> <button type="button" onclick="" id="show_nearest_trashcan">Anzeigen</button>  <button>Route berechnen</button>`
+	    html += `<br><button type="button" onclick="" id="show_nearest_trashcan">Anzeigen</button>  <button>Route berechnen</button>`
       loc.content = html
       LOCATIONS.push(loc);
     }
