@@ -47,38 +47,44 @@ function setMarkersFromLocations(locations, map) {
     setMarker(key, map);
   });
 }
+
+function generateContent(item) {
+  let html = `<b>ID:</b> ${item.trashBinID}<br>`;
+  if(item.distance_in_m) {
+    const newDistance = (Math.round(item.distance_in_m * 10)/10).toString().replace('.', ',');
+    html += `<b>${TRANSLATION_DE.distance["_"]}:</b> <b>${newDistance} m</b>`;
+  }	
+  var tags = ["vending", "payment:none","fee","highway","indoor","waste","_lastcheck","_level","tourism","tunnel","_operator","_name"];
+
+  for(var tag of tags) {
+    let numerical = tag.charAt(0)=='_';
+		if(numerical) tag = tag.substr(1);
+    if(item.subdata[tag]) {
+      html += `<br><b>${TRANSLATION_DE[tag]["_"]}:</b> `;
+			if(numerical)
+        html += `${item.subdata[tag]}`;
+			else if(TRANSLATION_DE[tag])
+        html += `${TRANSLATION_DE[tag][item.subdata[tag]]}`;
+      else
+        html += `${item.subdata[tag]}`;
+
+    }
+  }
+	html += `<br><button type="button" onclick="" id="show_nearest_trashcan">Anzeigen</button>  <button>Route berechnen</button>`;
+  return html;
+}
+
 function populateByTrashcans(lat, lng, map) {
   function reqListener (respText) {
     const json = JSON.parse(respText);
     for(var item of json) {
       let subdata = JSON.parse(item.data);
       item.subdata = subdata;
-      let html = `<b>ID:</b> ${item.trashBinID}<br>`;
       var loc = {
         'lat': item.latitude,
-        'lng': item.longitude
+        'lng': item.longitude,
+        content: generateContent(item);
       }
-      if(item.distance_in_m) {
-        const newDistance = (Math.round(item.distance_in_m * 10)/10).toString().replace('.', ',');
-        html += `<b>${TRANSLATION_DE.distance["_"]}:</b> <b>${newDistance} m</b>`;
-      }	
-      var tags = ["vending", "payment:none","fee","highway","indoor","waste","_lastcheck","_level","tourism","tunnel","_operator","_name"];
-
-      for(var tag of tags) {
-        let numerical = tag.charAt(0)=='_';
-				if(numerical) tag = tag.substr(1);
-        if(item.subdata[tag]) {
-          html += `<br><b>${TRANSLATION_DE[tag]["_"]}:</b> `;
-					if(numerical)
-            html += `${item.subdata[tag]}`;
-					else if(TRANSLATION_DE[tag])
-            html += `${TRANSLATION_DE[tag][item.subdata[tag]]}`;
-          else
-            html += `${item.subdata[tag]}`;
-
-        }
-      }
-	    html += `<br><button type="button" onclick="" id="show_nearest_trashcan">Anzeigen</button>  <button>Route berechnen</button>`;
       loc.content = html;
       LOCATIONS.push(loc);
     }
