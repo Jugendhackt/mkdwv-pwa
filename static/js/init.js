@@ -46,13 +46,29 @@ function initMap() {
     
     if(firstcheck) {
       mymap.locate({enableHighAccuracy: true, watch: true, setView: false,
-                    timeout: 100000, maximumAge: 15000});
+                    timeout: 604800000, maximumAge: 15000});
       firstcheck = false;
     }
   }
 
   function onLocationError(e) {
-    alert(e.message);
+    if(e.code == 3) { //timeout
+      //should happen rarely bc of timeout = one week
+      alert("Die Standortabfrage lief aus. Lade die Seite erneut.");
+    } else if (e.code == 2) {
+      alert("Standort nicht feststellbar.");
+    } else if (e.code == 1) {
+      //TODO tell user to accept after 10s or so
+      alert("Du musst die Standortberechtigung zulassen.");
+      mymap.stopLocate(); firstcheck = true;
+      mymap.locate({enableHighAccuracy: true, watch: false, setView: true,
+                    maxZoom: 16, timeout: 604800000});
+    } else if (e.code == 0) {
+      alert("Standortzugriff wird nicht unterstützt.");
+    } else {
+      //should - considering the source code - never happen
+      alert("Unbekannte Fehlermeldung: " + e.message);
+    }
     console.log(e);
   }
 
@@ -73,7 +89,8 @@ function initMap() {
   mymap.on('click', setMarker);
   mymap.on('locationfound', (e) => {updateLocation(e, mymap);});
   mymap.on('locationerror', onLocationError);
-  mymap.locate({enableHighAccuracy: true, watch: false, setView: true, maxZoom: 16});
+  mymap.locate({enableHighAccuracy: true, watch: false, setView: true,
+                maxZoom: 16, timeout: 604800000});
 
   navigator.geolocation.getCurrentPosition(position =>  {
     console.log(position);
