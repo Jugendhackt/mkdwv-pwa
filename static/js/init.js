@@ -45,13 +45,15 @@ function initMap() {
     poscircle = L.circle(e.latlng, radius).addTo(map);
     
     if(firstcheck) {
-      mymap.locate({enableHighAccuracy: true, watch: true, setView: false});
+      mymap.locate({enableHighAccuracy: true, watch: true, setView: false,
+                    timeout: 100000, maximumAge: 15000});
       firstcheck = false;
     }
   }
 
   function onLocationError(e) {
     alert(e.message);
+    console.log(e);
   }
 
   var control = L.control.layers(baseLayers)
