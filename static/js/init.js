@@ -20,12 +20,31 @@ function initMap() {
     id: 'mapbox.streets', layers: [mapnikLayer]
   }).addTo(mymap);
 
+  //set layers up
   var baseLayers = {
 	      'Mapnik': mapnikLayer,
 	      'Black and Whilte': blackAndWhite,
 	      'Watercolor': watercolorLayer
   }
   
+  var control = L.control.layers(baseLayers);
+	control.addTo(mymap);
+
+  //set marker on click
+  function setMarker(e){
+      var lat = e.latlng.lat;
+      var lng = e.latlng.lng;
+      var marker = L.marker([lat, lng]).on('click', () => {
+          displayAdd();
+          //var msg = document.querySelector("#description").value;
+	        //marker.bindPopup(msg).openPopup();
+      }).addTo(mymap);
+      marker.bindPopup(lat + " " + lng).openPopup();
+  }
+
+  mymap.on('click', setMarker);
+
+  //location handling
   var posmarker, poscircle, firstcheck = true;
   function updateLocation(e, map) {
     var radius = e.accuracy / 2;
@@ -65,28 +84,14 @@ function initMap() {
     console.log(e);
   }
 
-  var control = L.control.layers(baseLayers)
-	control.addTo(mymap)
-
-  function setMarker(e){
-      var lat = e.latlng.lat;
-      var lng = e.latlng.lng;
-      var marker = L.marker([lat, lng]).on('click', () => {
-          displayAdd();
-          //var msg = document.querySelector("#description").value;
-	        //marker.bindPopup(msg).openPopup();
-      }).addTo(mymap);
-      marker.bindPopup(lat + " " + lng).openPopup();
-  }
-
-  mymap.on('click', setMarker);
   mymap.on('locationfound', (e) => {updateLocation(e, mymap);});
   mymap.on('locationerror', onLocationError);
   mymap.locate({enableHighAccuracy: true, watch: false, setView: true,
                 maxZoom: 16, timeout: 604800000});
 
+  //load trashcans
   navigator.geolocation.getCurrentPosition(position =>  {
     console.log(position);
     populateByTrashcans(Math.floor(position.coords.latitude * 1000)/1000, Math.floor(position.coords.longitude * 1000)/1000, mymap);
-  })
+  });
 }
