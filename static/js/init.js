@@ -6,16 +6,9 @@ else console.log("Webtest success!");
 
 var mymap;
 
-var mapnikLayer = L.tileLayer(
-	'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-);
-var blackAndWhite = L.tileLayer(
-	'http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png'
-);
-
-var watercolorLayer = L.tileLayer(
-	'http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg'
-);
+var mapnikLayer = L.tileLayer(TILE_URLS["default"]);
+var blackAndWhite = L.tileLayer(TILE_URLS["blackwhite"]);
+var watercolorLayer = L.tileLayer(TILE_URLS["watercolor"]);
 
 function initMap() {
   mymap = L.map('mapid').setView([50.104278, 8.675969], 13);

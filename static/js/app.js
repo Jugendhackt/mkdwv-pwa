@@ -3,6 +3,7 @@ const MAP_PROVIDER = "leaflet";
 const TILE_URLS = {
   "default": "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
   "watercolor": "http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg",
+  "blackwhite": 'http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png',
   "googlesat": "http://mt.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
   "googlehybrid": "http://mt.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
   "googleroadmap": "http://mt.google.com/vt/lyrs=m&x={x}&y={y}&z={z}",
