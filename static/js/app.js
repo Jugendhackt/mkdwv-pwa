@@ -83,7 +83,7 @@ function populateByTrashcans(lat, lng, map) {
       var loc = {
         'lat': item.latitude,
         'lng': item.longitude,
-        content: generateContent(item);
+        content: generateContent(item)
       }
       loc.content = html;
       LOCATIONS.push(loc);
