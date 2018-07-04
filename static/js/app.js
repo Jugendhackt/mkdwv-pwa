@@ -85,7 +85,6 @@ function populateByTrashcans(lat, lng, map) {
         'lng': item.longitude,
         content: generateContent(item)
       };
-      loc.content = html;
       LOCATIONS.push(loc);
     }
     document.getElementById("search-output").innerHTML = JSON.stringify(LOCATIONS, null, 4);
