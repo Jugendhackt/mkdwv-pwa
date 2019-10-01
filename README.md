@@ -1,5 +1,6 @@
 # Mit Kot die Welt verbessern
 ![Read the Docs](https://img.shields.io/readthedocs/kot-fur-die-welt.svg?style=flat-square)
+[![Jugendhackt](https://jhbadge.com/?year=2018&evt=ffm)](https://jugendhackt.org)
 
 **Endprodukt:**
  - Müll melden (an Stadtwerke)
